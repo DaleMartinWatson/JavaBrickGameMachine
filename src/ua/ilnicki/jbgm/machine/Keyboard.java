@@ -12,7 +12,7 @@ public class Keyboard
     /**
      * Клавиши используемые для управления игрой.
      */
-    public enum CtrlKeys
+    public static enum CtrlKey
     {
         /**
          * Клавиша UP
@@ -39,7 +39,7 @@ public class Keyboard
     /**
      * Клавиши используемые для управления устройством.
      */
-    public enum SysKeys
+    public static enum SysKey
     {
         /**
          * Клавиша RESET
@@ -59,8 +59,8 @@ public class Keyboard
         ONOFF
     }
 
-    private final HashMap<CtrlKeys, Boolean> ctrlKeysMap;
-    private final HashMap<SysKeys, Boolean> sysKeysMap;
+    private final HashMap<CtrlKey, Boolean> ctrlKeysMap;
+    private final HashMap<SysKey, Boolean> sysKeysMap;
 
     /**
      * Инациализирует карты с клавишами для управляющих и системных клавиш.
@@ -68,13 +68,13 @@ public class Keyboard
     public Keyboard()
     {
         this.ctrlKeysMap = new HashMap<>();
-        for (CtrlKeys key : CtrlKeys.values())
+        for (CtrlKey key : CtrlKey.values())
         {
             this.ctrlKeysMap.put(key, false);
         }
 
         this.sysKeysMap = new HashMap<>();
-        for (SysKeys key : SysKeys.values())
+        for (SysKey key : SysKey.values())
         {
             this.sysKeysMap.put(key, false);
         }
@@ -83,11 +83,11 @@ public class Keyboard
     /**
      * Метод проверяет, нажата ли управляющая клавиша.
      *
-     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKeys}.
+     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
      *
      * @return Результат проверки нажатия управляющей клавиши. Возвращает true - если указанная клавиша нажата и false в противном случае.
      */
-    public boolean ctrlKeyPressed(CtrlKeys key)
+    public boolean isCtrlKeyDown(CtrlKey key)
     {
         return this.ctrlKeysMap.get(key);
     }
@@ -95,10 +95,10 @@ public class Keyboard
     /**
      * Устанавливает значение управляющей клавиши.
      *
-     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKeys}.
+     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
      * @param state Состояние, в которое устанавливается клавиша: true - нажата, false - отжата.
      */
-    public void setCtrlKeyState(CtrlKeys key, boolean state)
+    public void setCtrlKeyState(CtrlKey key, boolean state)
     {
         this.ctrlKeysMap.put(key, state);
     }
@@ -106,11 +106,11 @@ public class Keyboard
     /**
      * Метод проверяет, нажата ли системная клавиша.
      *
-     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKeys}.
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKey}.
      *
      * @return Результат проверки нажатия системной клаиши. Возвращает true - если указанная клавиша нажата и false в противном случае.
      */
-    public boolean sysKeyPressed(SysKeys key)
+    public boolean isSysKeyDown(SysKey key)
     {
         return this.sysKeysMap.get(key);
     }
@@ -118,10 +118,10 @@ public class Keyboard
     /**
      * Устанавливает значение системной клавиши.
      *
-     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKeys}.
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKey}.
      * @param state Состояние, в которое устанавливается клавиша: true - нажата, false - отжата.
      */
-    public void setSysKeyState(SysKeys key, boolean state)
+    public void setSysKeyState(SysKey key, boolean state)
     {
         this.sysKeysMap.put(key, state);
     }
@@ -139,7 +139,7 @@ public class Keyboard
     /**
      * Класс, предназначеный для передачи значений клавиатуры во внешние приложения, подключаемые к машине.
      */
-    public class KeyboardPasser
+    public static class KeyboardPasser
     {
         private final Keyboard kb;
 
@@ -150,12 +150,12 @@ public class Keyboard
         
         /**
          * Метод проверяет, нажата ли управляющая клавиша.
-         * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKeys}.
+         * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
          * @return Результат проверки нажатия управляющей клавиши. Возвращает true - если указанная клавиша нажата и false в противном случае.
          */
-        public boolean keyPressed(CtrlKeys key)
+        public boolean isKeyDown(CtrlKey key)
         {
-            return kb.ctrlKeyPressed(key);
+            return kb.isCtrlKeyDown(key);
         }
     }
 }

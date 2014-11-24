@@ -1,6 +1,6 @@
 package ua.ilnicki.jbgm.machine;
 
-import ua.ilnicki.jbgm.util.BrickGameParameter;
+import ua.ilnicki.jbgm.machine.Keyboard.KeyboardPasser;
 
 /**
  *
@@ -8,35 +8,82 @@ import ua.ilnicki.jbgm.util.BrickGameParameter;
  */
 public class BrickGameMachine
 {
+    public static class Parameters
+    {
+        /**
+         *
+         */
+        public final BrickGameIntParameter score;
+
+        /**
+         *
+         */
+        public final BrickGameIntParameter hiscore;
+
+        /**
+         *
+         */
+        public final BrickGameIntParameter speed;
+
+        /**
+         *
+         */
+        public final BrickGameIntParameter level;
+
+        /**
+         *
+         */
+        public final BrickGameIntParameter volume;
+
+        private Parameters()
+        {
+            this.score = new BrickGameIntParameter(0, 999999);
+            this.hiscore = new BrickGameIntParameter(0, 999999);
+            this.speed = new BrickGameIntParameter(0, 9);
+            this.level = new BrickGameIntParameter(0, 9);
+            this.volume = new BrickGameIntParameter(0, 3);
+        }
+    }
 
     /**
      *
      */
-    public final BrickGameParameter score = new BrickGameParameter(999999);
+    public final Parameters parameters;
 
     /**
      *
      */
-    public final BrickGameParameter hiscore = new BrickGameParameter(999999);
+    public final BrickGameBoolParameter pause;
 
     /**
      *
      */
-    public final BrickGameParameter speed = new BrickGameParameter(9);
+    protected final Keyboard keyboard;
 
     /**
      *
      */
-    public final BrickGameParameter level = new BrickGameParameter(9);
+    public final KeyboardPasser keyboardPasser;
 
     /**
      *
      */
-    public final BrickGameParameter volume = new BrickGameParameter(3);
+    public final Field field;
 
     /**
      *
      */
-    public boolean pause = false;
-    
+    public final Screen screen;
+
+    public BrickGameMachine()
+    {
+        this.parameters = new Parameters();
+        this.pause = new BrickGameBoolParameter(false);
+
+        this.keyboard = new Keyboard();
+        this.keyboardPasser = this.keyboard.getKeyboardPasser();
+
+        this.field = new Field(200, 100);
+        this.screen = new Screen(20, 10, this.field);
+    }
 }

@@ -1,7 +1,7 @@
 package ua.ilnicki.jbgm;
 
-import ua.ilnicki.jbgm.machine.Keyboard;
-import ua.ilnicki.jbgm.machine.Keyboard.*;
+import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.*;
 
 /**
  *
@@ -11,15 +11,13 @@ public class JavaBrickGameMachine
 {
     public static void main(String[] args)
     {
-        Keyboard kb = new Keyboard();
-        KeyboardPasser kbp = kb.getKeyboardPasser();
+        PixelMatrix pm = makeFromArray(new int[][]
+            {
+                {0, 1, 0},
+                {1, 1, 1},
+                {1, 0, 1}
+            });
         
-        System.out.println(kb.ctrlKeyPressed(CtrlKeys.UP));
-        System.out.println(kbp.keyPressed(CtrlKeys.UP));
-        
-        kb.setCtrlKeyState(CtrlKeys.UP, true);
-        
-        System.out.println(kb.ctrlKeyPressed(CtrlKeys.UP));
-        System.out.println(kbp.keyPressed(CtrlKeys.UP));
-    } 
+        System.out.print(pm);
+    }
 }
