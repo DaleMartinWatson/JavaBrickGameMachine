@@ -4,7 +4,7 @@ package ua.ilnicki.jbgm.machine;
  * Класс предназначен для хранения параметров, содержащих в себе целые положительные числа с ограничением, при переполнении сбрасывающиеся в 0.
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameIntParameter implements BrickGameNumericParameter<Integer>
+public class BrickGameIntParameter
 {
     private int value = 0;
     private final int minValue;
@@ -38,7 +38,6 @@ public class BrickGameIntParameter implements BrickGameNumericParameter<Integer>
      * Возвращает текущее значение параметра.
      * @return Целое число, текущее значение параметра.
      */
-    @Override
     public Integer get()
     {
         return value;
@@ -48,7 +47,6 @@ public class BrickGameIntParameter implements BrickGameNumericParameter<Integer>
      * Устанавливает значение параметра,
      * @param value Значение, которое уставнливается в параметре. При значении меньше минимального устанавливается минимальное значение, при переполнении - максимальное значение.
      */
-    @Override
     public void set(Integer value)
     {
         if (value > this.maxValue)
@@ -68,7 +66,6 @@ public class BrickGameIntParameter implements BrickGameNumericParameter<Integer>
     /**
      * Циклически увеличивает параметр на 1. При переполнении сбрасывает значение в минимальное значение.
      */
-    @Override
     public void inc()
     {
         if(++this.value > this.maxValue)
@@ -78,7 +75,6 @@ public class BrickGameIntParameter implements BrickGameNumericParameter<Integer>
     /**
      * Циклически уменьшает параметр на 1. При достижении минимального значения устанавливает параметр в максимальное значение. 
      */
-    @Override
     public void dec()
     {
         if(--this.value < this.minValue)

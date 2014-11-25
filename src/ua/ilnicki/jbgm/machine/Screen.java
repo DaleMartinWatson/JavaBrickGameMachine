@@ -1,19 +1,20 @@
 package ua.ilnicki.jbgm.machine;
 
+import ua.ilnicki.jbgm.pixelmatrix.Pixel;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 
 /**
  *
  * @author Dmytro
  */
-public class Screen extends PixelMatrix
+public final class Screen extends PixelMatrix
 {
 
     private final int height;
     private final int width;
-    private final Field field;
-    private int positionX = 0;
+    private Field field;
     private int positionY = 0;
+    private int positionX = 0;
 
     public Screen(int height, int width, Field field)
     {
@@ -33,7 +34,7 @@ public class Screen extends PixelMatrix
     @Override
     public Pixel getPixel(int y, int x)
     {
-        if (y >= this.height || y < 0 || x >= this.height || x < 0)
+        if (y >= this.getHeight() || y < 0 || x >= this.getWidth() || x < 0)
         {
             throw new IndexOutOfBoundsException(String.format("Wrong matrix element indexes [%d, %d]", y, x));
         }
@@ -41,10 +42,11 @@ public class Screen extends PixelMatrix
         {
             try
             {
-                return field.getPixel(y, x);
-            } catch (Exception e)
+                return Pixel.merge(field.getPixel(y, x), Pixel.WHITE);
+            }
+            catch (Exception e)
             {
-                return null;
+                return Pixel.WHITE;
             }
         }
     }
@@ -79,11 +81,13 @@ public class Screen extends PixelMatrix
 
     public void setPositionY(int positionY)
     {
-        if(positionY < 0 || positionY >= this.field.getHeight())
+        if(positionY <= -this.getHeight() ||
+                positionY >= this.field.getHeight())
         {
             throw new IllegalArgumentException(String.format(
-                    "Wrong position: %d. Position must be in range from 0 to %d.",
-                    positionY, 
+                    "Wrong Y position: %d. Position must be in range from -%d to %d.",
+                    positionY,
+                    this.getHeight(),
                     this.field.getHeight()));
         }
         else
@@ -94,11 +98,13 @@ public class Screen extends PixelMatrix
     
     public void setPositionX(int positionX)
     {
-        if(positionX < 0 || positionX >= this.field.getWidth())
+        if(positionX <= -this.getWidth() || 
+                positionX >= this.field.getWidth())
         {
             throw new IllegalArgumentException(String.format(
-                    "Wrong position: %d. Position must be in range from 0 to %d.",
-                    positionX, 
+                    "Wrong X position: %d. Position must be in range from -%d to %d.",
+                    positionX,
+                    this.getWidth(),
                     this.field.getWidth()));
         }
         else
@@ -111,5 +117,12 @@ public class Screen extends PixelMatrix
     {
         this.setPositionY(positionY);
         this.setPositionX(positionX);
+    }
+
+    void setField(Field field)
+    {
+        this.field = field;
+        this.positionY = 0;
+        this.positionX = 0;
     }
 }

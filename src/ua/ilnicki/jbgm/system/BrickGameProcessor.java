@@ -4,7 +4,7 @@ import ua.ilnicki.jbgm.machine.BrickGameMachine;
 
 /**
  *
- * @author Dmytro
+ * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
 public interface BrickGameProcessor
 {

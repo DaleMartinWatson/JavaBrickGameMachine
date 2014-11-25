@@ -7,23 +7,13 @@ package ua.ilnicki.jbgm.pixelmatrix;
 public class PixelMatrix
 {
 
-    /**
-     *
-     */
-    public static enum Pixel
+    protected final Pixel[][] pixelMatrix;
+
+    public PixelMatrix(PixelMatrix pm)
     {
-        /**
-         *
-         */
-        BLACK,
-        /**
-         *
-         */
-        WHITE
+        this.pixelMatrix = pm.pixelMatrix;
     }
-
-    private final Pixel[][] pixelMatrix;
-
+    
     public PixelMatrix(int height, int width)
     {
         this.pixelMatrix = new Pixel[height][width];

@@ -48,7 +48,7 @@ public class BrickGameMachine
     /**
      *
      */
-    public final Parameters parameters;
+    private final Parameters parameters;
 
     /**
      *
@@ -58,22 +58,22 @@ public class BrickGameMachine
     /**
      *
      */
-    protected final Keyboard keyboard;
+    private final Keyboard keyboard;
 
     /**
      *
      */
-    public final KeyboardPasser keyboardPasser;
+    private final KeyboardPasser keyboardPasser;
 
     /**
      *
      */
-    public final Field field;
+    private Field field;
 
     /**
      *
      */
-    public final Screen screen;
+    private final Screen screen;
 
     public BrickGameMachine()
     {
@@ -83,7 +83,38 @@ public class BrickGameMachine
         this.keyboard = new Keyboard();
         this.keyboardPasser = this.keyboard.getKeyboardPasser();
 
-        this.field = new Field(200, 100);
+        this.field = new Field(20, 10);
         this.screen = new Screen(20, 10, this.field);
+    }
+    
+    public Parameters getParameters()
+    {
+        return parameters;
+    }
+
+    public Keyboard getKeyboard()
+    {
+        return keyboard;
+    }
+
+    public KeyboardPasser getKeyboardPasser()
+    {
+        return keyboardPasser;
+    }
+
+    public Field getField()
+    {
+        return field;
+    }
+    
+    public void recreateField(int height, int width) 
+    {
+        this.field = new Field(height, width);
+        this.screen.setField(this.field);
+    }
+
+    public Screen getScreen()
+    {
+        return screen;
     }
 }

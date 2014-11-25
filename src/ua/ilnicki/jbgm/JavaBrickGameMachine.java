@@ -19,5 +19,7 @@ public class JavaBrickGameMachine
             });
         
         System.out.print(pm);
+        
+        
     }
 }

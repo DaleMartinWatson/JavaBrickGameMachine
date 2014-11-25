@@ -1,6 +1,6 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
-import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix.Pixel;
+import ua.ilnicki.jbgm.pixelmatrix.Pixel;
 
 /**
  *
@@ -10,6 +10,9 @@ public class MatrixUtils
 {
     public static final int Vertically = 0;
     public static final int Horizontally = 1;
+    public static final int T = 0;
+    public static final int W = -1;
+    public static final int B = 1;
     
     public static void fillMatrixWith(PixelMatrix matrix, Pixel pixel)
     {
@@ -41,18 +44,22 @@ public class MatrixUtils
                 
                 try
                 {
-                    if(array[pm.getHeight() - i - 1][j] == 0)
+                    if(array[pm.getHeight() - i - 1][j] == W)
                     {
                         value = Pixel.WHITE;
                     }
-                    else
+                    else if(array[pm.getHeight() - i - 1][j] == B)
                     {
                         value = Pixel.BLACK;
+                    }
+                    else
+                    {
+                        value = null;
                     }
                 }
                 catch(Exception e)
                 {
-                    value = Pixel.WHITE;
+                    value = null;
                 }
                 
                 pm.setPixel(i, j, value);

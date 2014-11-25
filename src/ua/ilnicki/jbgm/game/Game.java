@@ -8,7 +8,7 @@ import ua.ilnicki.jbgm.system.BrickGameProcessor;
 
 /**
  *
- * @author Dmytro
+ * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
 public interface Game extends BrickGameProcessor
 {
