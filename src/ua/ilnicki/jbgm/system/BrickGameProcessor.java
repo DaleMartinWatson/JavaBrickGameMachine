@@ -1,7 +1,5 @@
 package ua.ilnicki.jbgm.system;
 
-import ua.ilnicki.jbgm.machine.BrickGameMachine;
-
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
@@ -10,9 +8,9 @@ public interface BrickGameProcessor
 {
     /**
      *
-     * @param machine
+     * @param pm
      */
-    public void init(BrickGameMachine machine);
+    public void init(ProcessManager pm);
 
     /**
      *

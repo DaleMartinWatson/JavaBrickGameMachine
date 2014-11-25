@@ -58,7 +58,7 @@ public class BrickGameMachine
     /**
      *
      */
-    private final Keyboard keyboard;
+    public final Keyboard keyboard;
 
     /**
      *
