@@ -59,8 +59,8 @@ public class Keyboard
         ONOFF
     }
 
-    private final HashMap<CtrlKey, Boolean> ctrlKeysMap;
-    private final HashMap<SysKey, Boolean> sysKeysMap;
+    private final HashMap<CtrlKey, Integer> ctrlKeysMap;
+    private final HashMap<SysKey, Integer> sysKeysMap;
 
     /**
      * Инациализирует карты с клавишами для управляющих и системных клавиш.
@@ -70,37 +70,50 @@ public class Keyboard
         this.ctrlKeysMap = new HashMap<>();
         for (CtrlKey key : CtrlKey.values())
         {
-            this.ctrlKeysMap.put(key, false);
+            this.ctrlKeysMap.put(key, 0);
         }
 
         this.sysKeysMap = new HashMap<>();
         for (SysKey key : SysKey.values())
         {
-            this.sysKeysMap.put(key, false);
+            this.sysKeysMap.put(key, 0);
         }
     }
 
     /**
      * Метод проверяет, нажата ли управляющая клавиша.
      *
-     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
      *
-     * @return Результат проверки нажатия управляющей клавиши. Возвращает true - если указанная клавиша нажата и false в противном случае.
+     * @return Результат проверки нажатия управляющей клаиши. Возвращает true - если указанная клавиша нажата и false в противном случае.
      */
     public boolean isCtrlKeyDown(CtrlKey key)
+    {
+        return this.ctrlKeysMap.get(key) > -1;
+    }
+    
+    /**
+     * Метод возвращает время, на протяжении которого нажата управляющая клавиша.
+     *
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
+     *
+     * @return Время, на протяжении которого нажата клавиша. Если результат равен -1, то клавиша отжата.
+     */
+    public int ctrlKeyDownTicksCount(CtrlKey key)
     {
         return this.ctrlKeysMap.get(key);
     }
 
     /**
-     * Устанавливает значение управляющей клавиши.
+     * Обновляет значение управляющей клавиши. Если клавиша нажата, то счетчик 
+     * времени нажатия увеличивается на 1, в противном случае устанавливается в -1.
      *
-     * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
-     * @param state Состояние, в которое устанавливается клавиша: true - нажата, false - отжата.
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
+     * @param state Состояние, в котором находится клавиша: true - нажата, false - отжата.
      */
-    public void setCtrlKeyState(CtrlKey key, boolean state)
+    public void updateCtrlKeyState(CtrlKey key, boolean state)
     {
-        this.ctrlKeysMap.put(key, state);
+        this.ctrlKeysMap.put(key, state ? this.ctrlKeysMap.get(key) + 1 : -1);
     }
 
     /**
@@ -112,18 +125,31 @@ public class Keyboard
      */
     public boolean isSysKeyDown(SysKey key)
     {
+        return this.sysKeysMap.get(key) > -1;
+    }
+    
+    /**
+     * Метод возвращает время, на протяжении которого нажата системная клавиша.
+     *
+     * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKey}.
+     *
+     * @return Время, на протяжении которого нажата клавиша. Если результат равен -1, то клавиша отжата.
+     */
+    public int sysKeyDownTicksCount(SysKey key)
+    {
         return this.sysKeysMap.get(key);
     }
 
     /**
-     * Устанавливает значение системной клавиши.
+     * Обновляет значение системной клавиши. Если клавиша нажата, то счетчик 
+     * времени нажатия увеличивается на 1, в противном случае устанавливается в -1.
      *
      * @param key Объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.SysKey}.
-     * @param state Состояние, в которое устанавливается клавиша: true - нажата, false - отжата.
+     * @param state Состояние, в котором находится клавиша: true - нажата, false - отжата.
      */
-    public void setSysKeyState(SysKey key, boolean state)
+    public void updateSysKeyState(SysKey key, boolean state)
     {
-        this.sysKeysMap.put(key, state);
+        this.sysKeysMap.put(key, state ? this.sysKeysMap.get(key) + 1 : -1);
     }
 
     /**

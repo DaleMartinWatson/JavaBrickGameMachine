@@ -28,7 +28,7 @@ public class VolumeProcessor implements BrickGameProcessor
     @Override
     public void onLaunch()
     {
-        if(this.saveCluster.valueExists("volume"))
+        if(this.saveCluster.valueExists("volume", Integer.class))
         {
             this.volume.set(this.saveCluster.getIntValue("volume"));
         }

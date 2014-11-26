@@ -33,24 +33,29 @@ public class SaveManager
             
         }
         
-        public int getIntValue(String volume)
+        public int getIntValue(String key)
         {
             return 0;
         }
         
-        public boolean getBoolValue(String volume)
+        public boolean getBoolValue(String key)
         {
             return true;
         }
         
-        public String getStringValue(String volume)
+        public String getStringValue(String key)
         {
             return "";
         }
 
-        public boolean valueExists(String volume)
+        public boolean valueExists(String key)
         {
             return true;
+        }
+
+        public boolean valueExists(String key, Class<Integer> type)
+        {
+            return type.isInstance(key);
         }
     }
 }
