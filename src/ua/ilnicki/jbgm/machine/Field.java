@@ -14,9 +14,9 @@ public final class Field extends PixelMatrix
     private final PixelMatrix baseLayer;
     private final List<Layer> layers;
     
-    public Field(int height, int width)
+    public Field(int width, int height)
     {
-        super(height, width);
+        super(width, height);
         
         this.baseLayer = new PixelMatrix(this);
         this.layers = new ArrayList<>();
@@ -33,21 +33,21 @@ public final class Field extends PixelMatrix
     }
 
     @Override
-    public Pixel getPixel(int y, int x)
+    public Pixel getPixel(int x, int y)
     {
-        if (y >= this.getHeight() || y < 0 || x >= this.getWidth() || x < 0)
+        if (x >= this.getWidth() || x < 0 || y >= this.getHeight() || y < 0)
         {
-            throw new IndexOutOfBoundsException(String.format("Wrong matrix element indexes [%d, %d]", y, x));
+            throw new IndexOutOfBoundsException(String.format("Wrong matrix element indexes [%d, %d].", x, y));
         }
         else
         {
             try
             {
-                Pixel result = this.baseLayer.getPixel(y, x);
+                Pixel result = this.baseLayer.getPixel(x, y);
                 
                 for(Layer layer : layers)
                 {
-                    result = Pixel.merge(layer.getPixel(y, x), result);
+                    result = Pixel.merge(layer.getPixel(x, y), result);
                 }
                 
                 return result;

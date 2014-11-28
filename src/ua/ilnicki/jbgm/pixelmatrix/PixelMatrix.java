@@ -13,63 +13,67 @@ public class PixelMatrix
     {
         this.pixelMatrix = pm.pixelMatrix;
     }
-    
-    public PixelMatrix(int height, int width)
-    {
-        this.pixelMatrix = new Pixel[height][width];
-    }
 
-    public int getHeight()
+    public PixelMatrix(int width, int height)
     {
-        return this.pixelMatrix.length;
+        if(width > 0 && height > 0)
+            this.pixelMatrix = new Pixel[height][width];
+        else
+            throw new IllegalArgumentException("Zero bound.");
     }
 
     public int getWidth()
     {
         return this.pixelMatrix[0].length;
     }
+    
+    public int getHeight()
+    {
+        return this.pixelMatrix.length;
+    }
 
-    public Pixel getPixel(int y, int x)
+    public Pixel getPixel(int x, int y)
     {
         return this.pixelMatrix[y][x];
     }
 
-    public void setPixel(int y, int x, Pixel value)
+    public void setPixel(int x, int y, Pixel value)
     {
         this.pixelMatrix[y][x] = value;
     }
-
-    public void clear()
+    
+    public Pixel getPixel(Point point)
     {
-        for (int i = 0; i < this.pixelMatrix.length; i++)
-        {
-            for (int j = 0; j < this.pixelMatrix[i].length; j++)
-            {
-                this.pixelMatrix[i][j] = Pixel.WHITE;
-            }
-        }
+        return this.pixelMatrix[point.getY()][point.getX()];
+    }
+
+    public void setPixel(Point point, Pixel value)
+    {
+        this.pixelMatrix[point.getY()][point.getX()] = value;
     }
 
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        
-        sb.append("Matrix: height = ").append(this.getHeight())
-                 .append("; width = ").append(this.getWidth()).append(";\n");
-        
+
+        sb.append(this.getClass().getSimpleName())
+          .append(": width = ").append(this.getWidth())
+          .append("; height = ").append(this.getHeight())
+          .append(";\n");
+
         for (int i = this.getHeight() - 1; i >= 0; i--)
         {
             for (int j = 0; j < this.getWidth(); j++)
             {
                 sb.append('[')
-                  .append(this.getPixel(i, j) == Pixel.BLACK ? 'X' : ' ')
-                  .append(']');
+                        .append(this.getPixel(j, i) == Pixel.BLACK ? 'X' : ' ')
+                        .append(']');
             }
-            
+
             sb.append('\n');
         }
-        
+
         return sb.toString();
     }
 }

@@ -124,7 +124,6 @@ public class BrickGameMachine
         return this.helper;
     }
     
-        
     public void recreateField(int height, int width) 
     {
         this.field = new Field(height, width);

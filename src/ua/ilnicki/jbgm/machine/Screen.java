@@ -2,27 +2,34 @@ package ua.ilnicki.jbgm.machine;
 
 import ua.ilnicki.jbgm.pixelmatrix.Pixel;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
+import ua.ilnicki.jbgm.pixelmatrix.Point;
+import ua.ilnicki.jbgm.pixelmatrix.Positionable;
 
 /**
  *
  * @author Dmytro
  */
-public final class Screen extends PixelMatrix
+public final class Screen extends PixelMatrix implements Positionable
 {
 
-    private final int height;
     private final int width;
+    private final int height;
     private Field field;
-    private int positionY = 0;
-    private int positionX = 0;
+    private Point position;
 
-    public Screen(int height, int width, Field field)
+    public Screen(int width, int height, Field field)
     {
-        super(0, 0);
+        super(1, 1);
 
-        this.height = height;
         this.width = width;
+        this.height = height;
+        this.setField(field);
+    }
+    
+    void setField(Field field)
+    {
         this.field = field;
+        this.position = new Point(0, 0);;
     }
 
     @Override
@@ -32,23 +39,39 @@ public final class Screen extends PixelMatrix
     }
 
     @Override
-    public Pixel getPixel(int y, int x)
+    public void setPixel(Point point, Pixel value)
     {
-        if (y >= this.getHeight() || y < 0 || x >= this.getWidth() || x < 0)
+        throw new UnsupportedOperationException("Can`t change state of Screen.");
+    }
+
+    @Override
+    public Pixel getPixel(Point point)
+    {
+        if (point.getX() >= this.getWidth() || point.getX() < 0 
+                || point.getY() >= this.getHeight() || point.getY() < 0)
         {
-            throw new IndexOutOfBoundsException(String.format("Wrong matrix element indexes [%d, %d]", y, x));
+            throw new IndexOutOfBoundsException(String.format(
+                    "Wrong matrix element indexes [%d, %d].",
+                    point.getX(), 
+                    point.getY()));
         }
         else
         {
             try
             {
-                return Pixel.merge(field.getPixel(y, x), Pixel.WHITE);
+                return Pixel.merge(field.getPixel(Point.add(point, this.position)), Pixel.WHITE);
             }
             catch (Exception e)
             {
                 return Pixel.WHITE;
             }
         }
+    }
+
+    @Override
+    public Pixel getPixel(int x, int y)
+    {
+        return this.getPixel(new Point(x, y));
     }
 
     @Override
@@ -62,40 +85,14 @@ public final class Screen extends PixelMatrix
     {
         return this.height;
     }
-    
-    @Override
-    public void clear()
-    {
-        throw new UnsupportedOperationException("Can`t clear Screen.");
-    }
 
+    @Override
     public int getPositionX()
     {
-        return positionX;
-    }
-
-    public int getPositionY()
-    {
-        return positionY;
-    }
-
-    public void setPositionY(int positionY)
-    {
-        if(positionY <= -this.getHeight() ||
-                positionY >= this.field.getHeight())
-        {
-            throw new IllegalArgumentException(String.format(
-                    "Wrong Y position: %d. Position must be in range from -%d to %d.",
-                    positionY,
-                    this.getHeight(),
-                    this.field.getHeight()));
-        }
-        else
-        {
-            this.positionY = positionY;
-        }
+        return position.getX();
     }
     
+    @Override
     public void setPositionX(int positionX)
     {
         if(positionX <= -this.getWidth() || 
@@ -109,20 +106,50 @@ public final class Screen extends PixelMatrix
         }
         else
         {
-            this.positionX = positionX;
+            this.position.setX(positionX);;
         }
     }
 
+    @Override
+    public int getPositionY()
+    {
+        return position.getY();
+    }
+
+    @Override
+    public void setPositionY(int positionY)
+    {
+        if(positionY <= -this.getHeight() ||
+                positionY >= this.field.getHeight())
+        {
+            throw new IllegalArgumentException(String.format(
+                    "Wrong Y position: %d. Position must be in range from -%d to %d.",
+                    positionY,
+                    this.getHeight(),
+                    this.field.getHeight()));
+        }
+        else
+        {
+            this.position.setY(positionY);;
+        }
+    }
+    
+    @Override
     public void setPosition(int positionY, int positionX)
     {
         this.setPositionY(positionY);
         this.setPositionX(positionX);
     }
-
-    void setField(Field field)
+    
+    @Override
+    public void setPositionPoint(Point point)
     {
-        this.field = field;
-        this.positionY = 0;
-        this.positionX = 0;
+        this.position = point;
+    }
+
+    @Override
+    public Point getPositionPoint()
+    {
+        return this.position;
     }
 }

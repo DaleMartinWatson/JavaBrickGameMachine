@@ -1,6 +1,6 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
-import ua.ilnicki.jbgm.pixelmatrix.Pixel;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.*;
 
 /**
  *
@@ -8,78 +8,86 @@ import ua.ilnicki.jbgm.pixelmatrix.Pixel;
  */
 public class MatrixUtils
 {
-    public static final int Vertically = 0;
-    public static final int Horizontally = 1;
-    public static final int T = 0;
-    public static final int W = -1;
-    public static final int B = 1;
-    
-    public static void fillMatrixWith(PixelMatrix matrix, Pixel pixel)
+
+    public enum ReflectType
     {
-        for (int i = 0; i < matrix.getHeight(); i++)
-        {
-            for (int j = 0; j < matrix.getWidth(); j++)
-            {
-                matrix.setPixel(i, j, pixel);
-            }
-        }
+
+        HORIZONTALLY,
+        VERTICALLY,
+        ON_MAJOR_DIAGONAL,
+        ON_MINOR_DIAGONAL
     }
-    
-    public static PixelMatrix makeFromArray(int[][] array)
+
+    public static PixelMatrix makeFromArray(Pixel[][] pixelArray)
     {
         int width = 0;
-        for(int[] line : array)
+        for (Pixel[] row : pixelArray)
+            if (row.length > width)
+                width = row.length;
+
+        PixelMatrix pm = new PixelMatrix(width, pixelArray.length);
+
+        for (int i = 0; i < pixelArray.length; i++)
         {
-            if(line.length > width)
-                width = line.length;
-        }
-        
-        PixelMatrix pm = new PixelMatrix(array.length, width);
-        
-        for (int i = 0; i < pm.getHeight(); i++)
-        {
-            for (int j = 0; j < pm.getWidth(); j++)
+            for (int j = 0; j < pixelArray[i].length; j++)
             {
-                Pixel value;
-                
-                try
-                {
-                    if(array[pm.getHeight() - i - 1][j] == W)
-                    {
-                        value = Pixel.WHITE;
-                    }
-                    else if(array[pm.getHeight() - i - 1][j] == B)
-                    {
-                        value = Pixel.BLACK;
-                    }
-                    else
-                    {
-                        value = null;
-                    }
-                }
-                catch(Exception e)
-                {
-                    value = null;
-                }
-                
-                pm.setPixel(i, j, value);
+                pm.setPixel(j, pm.getHeight() - 1 - i, pixelArray[i][j]);
             }
         }
+
         return pm;
     }
-    
-    public static PixelMatrix mirror(PixelMatrix pm, int type)
+
+    public static void clear(PixelMatrix pm)
     {
-        PixelMatrix newPm = new PixelMatrix(pm.getHeight(), pm.getWidth());
-        
-        for (int i = 0; i < pm.getHeight(); i++)
+        fill(pm, null);
+    }
+
+    public static void fill(PixelMatrix pm, Pixel fillWith)
+    {
+        for (int i = 0; i < pm.getWidth(); i++)
         {
-            for (int j = 0; j < pm.getWidth(); j++)
-            {    
-                newPm.setPixel(i, j, pm.getPixel(pm.getHeight() - i - 1, j));
+            for (int j = 0; j < pm.getHeight(); j++)
+            {
+                pm.setPixel(i, j, fillWith);
             }
         }
-        
+    }
+
+    public static PixelMatrix getReflected(PixelMatrix pm, ReflectType type)
+    {
+        PixelMatrix newPm;
+
+        if ((type == ON_MAJOR_DIAGONAL || type == ON_MINOR_DIAGONAL)
+                && pm.getWidth() != pm.getHeight())
+        {
+            newPm = new PixelMatrix(pm.getHeight(), pm.getWidth());
+        } else
+        {
+            newPm = new PixelMatrix(pm.getWidth(), pm.getHeight());
+        }
+
+        for (int i = 0; i < pm.getWidth(); i++)
+        {
+            for (int j = 0; j < pm.getHeight(); j++)
+            {
+                switch (type)
+                {
+                    case HORIZONTALLY:
+                        newPm.setPixel(i, j, pm.getPixel(i, pm.getHeight() - 1 - j));
+                        break;
+                    case VERTICALLY:
+                        newPm.setPixel(i, j, pm.getPixel(pm.getWidth() - 1 - i, j));
+                        break;
+                    case ON_MAJOR_DIAGONAL:
+                        throw new UnsupportedOperationException("Not supported yet.");
+                    case ON_MINOR_DIAGONAL:
+                        throw new UnsupportedOperationException("Not supported yet.");
+                }
+            }
+        }
+
         return newPm;
     }
+
 }
