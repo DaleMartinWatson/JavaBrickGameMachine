@@ -1,5 +1,6 @@
 package ua.ilnicki.jbgm.system;
 
+import ua.ilnicki.jbgm.machine.BrickGameIntParameter;
 import ua.ilnicki.jbgm.machine.BrickGameMachine;
 
 /**
@@ -9,6 +10,7 @@ import ua.ilnicki.jbgm.machine.BrickGameMachine;
 public class GameManager implements BrickGameProcessor
 {
     protected BrickGameMachine machine;
+    private final BrickGameIntParameter parameter = new BrickGameIntParameter(0, 99);
 
     @Override
     public void init(ProcessManager pm)
@@ -32,6 +34,11 @@ public class GameManager implements BrickGameProcessor
     public void onStop()
     {
 
+    }
+
+    public BrickGameIntParameter getParameter()
+    {
+        return parameter;
     }
     
     public void exit()

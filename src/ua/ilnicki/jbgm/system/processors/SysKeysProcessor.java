@@ -1,5 +1,6 @@
 package ua.ilnicki.jbgm.system.processors;
 
+import ua.ilnicki.jbgm.machine.BrickGameBoolParameter;
 import ua.ilnicki.jbgm.machine.BrickGameIntParameter;
 import ua.ilnicki.jbgm.machine.Keyboard;
 import ua.ilnicki.jbgm.machine.Keyboard.SysKey;
@@ -11,10 +12,11 @@ import ua.ilnicki.jbgm.system.SaveManager.SaveCluster;
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class VolumeProcessor implements BrickGameProcessor
+public class SysKeysProcessor implements BrickGameProcessor
 {
     private Keyboard keyboard;
     private BrickGameIntParameter volume;
+    private BrickGameBoolParameter pause;
     private SaveCluster saveCluster;
     
     @Override
@@ -22,6 +24,7 @@ public class VolumeProcessor implements BrickGameProcessor
     {
         this.keyboard = pm.getMachine().getKeyboard();
         this.volume = pm.getMachine().getParameters().volume;
+        this.pause = pm.getMachine().pause;
         this.saveCluster = pm.getSystem().getSaveManager().getCluster(this);
     }
 
@@ -40,6 +43,11 @@ public class VolumeProcessor implements BrickGameProcessor
         if(this.keyboard.isSysKeyDown(SysKey.SOUND))
         {
             this.volume.inc();
+        }
+        
+        if(this.keyboard.isSysKeyDown(SysKey.START))
+        {
+            this.pause.toggle();
         }
     }
 

@@ -1,6 +1,7 @@
 package ua.ilnicki.jbgm.machine;
 
 import ua.ilnicki.jbgm.machine.Keyboard.KeyboardPasser;
+import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 
 /**
  *
@@ -74,6 +75,11 @@ public class BrickGameMachine
      *
      */
     private final Screen screen;
+    
+    /**
+     *
+     */
+    private final PixelMatrix helper;
 
     public BrickGameMachine()
     {
@@ -85,6 +91,7 @@ public class BrickGameMachine
 
         this.field = new Field(20, 10);
         this.screen = new Screen(20, 10, this.field);
+        this.helper = new PixelMatrix(4, 4);
     }
     
     public Parameters getParameters()
@@ -106,15 +113,21 @@ public class BrickGameMachine
     {
         return field;
     }
-    
-    public void recreateField(int height, int width) 
-    {
-        this.field = new Field(height, width);
-        this.screen.setField(this.field);
-    }
 
     public Screen getScreen()
     {
         return screen;
+    }
+    
+    public PixelMatrix getHelper()
+    {
+        return this.helper;
+    }
+    
+        
+    public void recreateField(int height, int width) 
+    {
+        this.field = new Field(height, width);
+        this.screen.setField(this.field);
     }
 }
