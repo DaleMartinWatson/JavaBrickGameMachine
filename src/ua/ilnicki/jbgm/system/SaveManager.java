@@ -1,69 +1,63 @@
 package ua.ilnicki.jbgm.system;
 
+import ua.ilnicki.jbgm.data.DataCluster;
+import ua.ilnicki.jbgm.data.DataProvider;
+import ua.ilnicki.jbgm.data.DataWriteException;
+
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class SaveManager
+public final class SaveManager
 {
-    public SaveCluster getCluster(Object obj)
+    private final DataProvider dataProvider;
+
+    public SaveManager(DataProvider dataProvider)
     {
-        return new SaveCluster(this, obj.getClass());
+        this.dataProvider = dataProvider;
     }
     
-    public class SaveCluster implements DataCluster
+    public SaveCluster getCluster(Object obj)
     {
-        private SaveCluster(SaveManager sm, Class<? extends Object> callerClass)
+        return new SaveCluster(obj.getClass());
+    }
+
+    private DataCluster readDataCluster(String clusterName)
+    {
+        return this.dataProvider.readData(clusterName);
+    }
+
+    private void writeDataCluster(String clusterName, DataCluster dataCluster) throws DataWriteException
+    {
+        this.dataProvider.writeData(clusterName, dataCluster);
+    }
+
+    public final class SaveCluster extends DataCluster
+    {
+
+        private boolean closed = false;
+        private final String clusterName;
+
+        private SaveCluster(Class callerClass)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            super(SaveManager.this.readDataCluster(callerClass.getName()));
+            this.clusterName = callerClass.getName();
         }
 
         @Override
-        public void setValue(String key, int value)
+        public void close()
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            super.close();
+            this.closed = true;
         }
 
-        @Override
-        public void setValue(String key, boolean value)
+        public void save() throws Exception
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            if(!this.closed)
+                SaveManager.this.writeDataCluster(this.clusterName, this);
+            else
+                throw new Exception("Can`t save closed SaveCluster.");
         }
 
-        @Override
-        public void setValue(String key, String value)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public int getIntValue(String key)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public boolean getBoolValue(String key)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public String getStringValue(String key)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public boolean valueExists(String key)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-
-        @Override
-        public boolean valueExists(String key, Class type)
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
     }
 }

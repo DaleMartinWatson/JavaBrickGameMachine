@@ -66,9 +66,16 @@ public class PixelMatrix
         {
             for (int j = 0; j < this.getWidth(); j++)
             {
-                sb.append('[')
+                if(this.getPixel(j, i) != null)
+                {
+                    sb.append('[')
                         .append(this.getPixel(j, i) == Pixel.BLACK ? 'X' : ' ')
                         .append(']');
+                }
+                else
+                {
+                    sb.append("   ");
+                }
             }
 
             sb.append('\n');

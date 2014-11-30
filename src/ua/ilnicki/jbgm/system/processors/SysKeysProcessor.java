@@ -5,8 +5,8 @@ import ua.ilnicki.jbgm.machine.BrickGameIntParameter;
 import ua.ilnicki.jbgm.machine.Keyboard;
 import ua.ilnicki.jbgm.machine.Keyboard.SysKey;
 import ua.ilnicki.jbgm.system.BrickGameProcessor;
+import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.system.ProcessManager;
-import ua.ilnicki.jbgm.system.SaveManager.SaveCluster;
 
 /**
  *
@@ -17,7 +17,7 @@ public class SysKeysProcessor implements BrickGameProcessor
     private Keyboard keyboard;
     private BrickGameIntParameter volume;
     private BrickGameBoolParameter pause;
-    private SaveCluster saveCluster;
+    private DataCluster saveCluster;
     
     @Override
     public void init(ProcessManager pm)
