@@ -1,6 +1,7 @@
 package ua.ilnicki.jbgm.system;
 
-import ua.ilnicki.jbgm.data.gson.GsonFileDataProvider;
+import ua.ilnicki.jbgm.data.DataProvider;
+import ua.ilnicki.jbgm.data.DataWriteException;
 
 /**
  *
@@ -9,14 +10,33 @@ import ua.ilnicki.jbgm.data.gson.GsonFileDataProvider;
 public class SystemManager
 {
     private final SaveManager saveManager;
+    private final ConfigManager configManager;
 
     public SystemManager()
     {
-        this.saveManager = new SaveManager(new GsonFileDataProvider());
+        DataProvider provider = null;
+        try
+        {
+            provider = DataProvider.createDataProvider();
+        } 
+        catch (DataWriteException | ClassNotFoundException |
+               InstantiationException | IllegalAccessException ex)
+        {
+            System.exit(1);
+        }
+        
+        this.configManager = new ConfigManager(provider);
+        this.saveManager = new SaveManager(provider);
     }
 
     public SaveManager getSaveManager()
     {
         return saveManager;
     }
+
+    public ConfigManager getConfigManager()
+    {
+        return configManager;
+    }
+
 }

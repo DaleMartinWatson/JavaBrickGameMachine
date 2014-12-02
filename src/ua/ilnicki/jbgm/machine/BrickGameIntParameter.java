@@ -1,10 +1,12 @@
 package ua.ilnicki.jbgm.machine;
 
+import java.io.Serializable;
+
 /**
  * Класс предназначен для хранения параметров, содержащих в себе целые положительные числа с ограничением, при переполнении сбрасывающиеся в 0.
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameIntParameter
+public class BrickGameIntParameter implements Serializable
 {
     private int value = 0;
     private final int minValue;

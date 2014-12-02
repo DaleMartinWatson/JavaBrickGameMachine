@@ -1,10 +1,12 @@
 package ua.ilnicki.jbgm.machine;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameBoolParameter
+public class BrickGameBoolParameter implements Serializable
 {
     private boolean value;
 

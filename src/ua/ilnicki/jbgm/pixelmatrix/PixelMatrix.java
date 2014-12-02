@@ -1,10 +1,12 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class PixelMatrix
+public class PixelMatrix implements Serializable
 {
 
     protected final Pixel[][] pixelMatrix;

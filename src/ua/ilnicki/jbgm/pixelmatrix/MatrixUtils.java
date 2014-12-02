@@ -12,10 +12,10 @@ public class MatrixUtils
     public enum ReflectType
     {
 
-        HORIZONTALLY,
-        VERTICALLY,
-        ON_MAJOR_DIAGONAL,
-        ON_MINOR_DIAGONAL
+        RT_HORIZONTALLY,
+        RT_VERTICALLY,
+        RT_ON_MAJOR_DIAGONAL,
+        RT_ON_MINOR_DIAGONAL
     }
 
     public static PixelMatrix makeFromArray(Pixel[][] pixelArray)
@@ -58,7 +58,7 @@ public class MatrixUtils
     {
         PixelMatrix newPm;
 
-        if ((type == ON_MAJOR_DIAGONAL || type == ON_MINOR_DIAGONAL)
+        if ((type == RT_ON_MAJOR_DIAGONAL || type == RT_ON_MINOR_DIAGONAL)
                 && pm.getWidth() != pm.getHeight())
         {
             newPm = new PixelMatrix(pm.getHeight(), pm.getWidth());
@@ -73,15 +73,15 @@ public class MatrixUtils
             {
                 switch (type)
                 {
-                    case HORIZONTALLY:
+                    case RT_HORIZONTALLY:
                         newPm.setPixel(i, j, pm.getPixel(i, pm.getHeight() - 1 - j));
                         break;
-                    case VERTICALLY:
+                    case RT_VERTICALLY:
                         newPm.setPixel(i, j, pm.getPixel(pm.getWidth() - 1 - i, j));
                         break;
-                    case ON_MAJOR_DIAGONAL:
+                    case RT_ON_MAJOR_DIAGONAL:
                         throw new UnsupportedOperationException("Not supported yet.");
-                    case ON_MINOR_DIAGONAL:
+                    case RT_ON_MINOR_DIAGONAL:
                         throw new UnsupportedOperationException("Not supported yet.");
                 }
             }

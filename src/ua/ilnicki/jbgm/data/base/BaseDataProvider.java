@@ -1,0 +1,83 @@
+package ua.ilnicki.jbgm.data.base;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import ua.ilnicki.jbgm.data.DataCluster;
+import ua.ilnicki.jbgm.data.DataProvider;
+import ua.ilnicki.jbgm.data.DataWriteException;
+
+public final class BaseDataProvider implements DataProvider
+{
+
+    private Path dataPath;
+
+    public BaseDataProvider() throws DataWriteException
+    {
+        this.setLocation(".\\data\\");
+    }
+
+    @Override
+    public String getLocation()
+    {
+        return this.dataPath.toString();
+    }
+
+    @Override
+    public void setLocation(String path) throws DataWriteException
+    {
+        File dataDir = new File(path);
+
+        try
+        {
+            dataDir.mkdirs();
+            this.dataPath = Paths.get(dataDir.getCanonicalPath());
+        } catch (SecurityException | IOException se)
+        {
+            throw new DataWriteException(se);
+        }
+    }
+
+    @Override
+    public DataCluster readData(String clusterName)
+    {
+        try (ObjectInputStream in = new ObjectInputStream(
+                new FileInputStream((makeDataFileName(clusterName)))))
+        {
+            return (DataCluster) in.readObject();
+
+        } catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public void writeData(String clusterName, DataCluster dataCluster) throws DataWriteException
+    {
+        try (ObjectOutputStream out = new ObjectOutputStream(
+                new FileOutputStream(makeDataFileName(clusterName))))
+        {
+            out.writeObject(dataCluster);
+        } catch (IOException ex)
+        {
+            throw new DataWriteException(ex);
+        }
+    }
+
+    private String makeDataFileName(String dataName)
+    {
+        return Paths.get(this.getLocation(), dataName + ".base").toString();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getClass().getSimpleName();
+    }
+}

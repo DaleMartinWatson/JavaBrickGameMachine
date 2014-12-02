@@ -1,12 +1,13 @@
 package ua.ilnicki.jbgm.data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class DataCluster
+public class DataCluster implements Serializable
 {
 
     protected HashMap<String, Object> dataSet;
@@ -70,6 +71,12 @@ public class DataCluster
     {
         return this.dataSet.containsKey(key)
                 && type.isInstance(this.dataSet.get(key));
+    }
+    
+    public String[] getKeys()
+    {
+        String[] keys = this.dataSet.keySet().toArray(new String[0]);
+        return keys != null ? keys : new String[0];
     }
     
     public void close()

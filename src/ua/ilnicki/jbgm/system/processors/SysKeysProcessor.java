@@ -1,11 +1,11 @@
 package ua.ilnicki.jbgm.system.processors;
 
+import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.machine.BrickGameBoolParameter;
 import ua.ilnicki.jbgm.machine.BrickGameIntParameter;
 import ua.ilnicki.jbgm.machine.Keyboard;
 import ua.ilnicki.jbgm.machine.Keyboard.SysKey;
 import ua.ilnicki.jbgm.system.BrickGameProcessor;
-import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.system.ProcessManager;
 
 /**

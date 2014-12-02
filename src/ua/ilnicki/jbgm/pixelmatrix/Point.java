@@ -1,8 +1,5 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}

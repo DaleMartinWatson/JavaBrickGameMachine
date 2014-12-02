@@ -56,7 +56,7 @@ public class DataClusterSerialiser implements JsonSerializer<DataCluster>, JsonD
     @Override
     public DataCluster deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
     {
-        HashMap<String, Object> dataSet = new HashMap<>();
+        HashMap<String, Object> dataSet = new HashMap<>(json.getAsJsonArray().size());
         
         for(JsonElement element : json.getAsJsonArray())
         {
