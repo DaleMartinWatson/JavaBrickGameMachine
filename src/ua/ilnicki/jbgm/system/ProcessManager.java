@@ -1,29 +1,49 @@
 package ua.ilnicki.jbgm.system;
 
-import ua.ilnicki.jbgm.machine.BrickGameMachine;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import ua.ilnicki.jbgm.system.processors.SysKeysProcessor;
 
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class ProcessManager
+public final class ProcessManager implements Module
 {
-    protected final BrickGameMachine machine;
+    private final Set<BrickGameProcessor> processors;
     private final SystemManager system;
 
-    public ProcessManager(BrickGameMachine machine, SystemManager sm)
+    public ProcessManager(SystemManager sm)
     {
-        this.machine = machine;
         this.system = sm;
+        this.processors = new LinkedHashSet<>();
+        
+        init();
+    }
+    
+    public void init()
+    {
+        this.processors.add(new SysKeysProcessor());
+        this.processors.add(new GameManager());
+        
+        this.processors.forEach(p -> p.init(this, this.system));
     }
 
-    public BrickGameMachine getMachine()
+    @Override
+    public void onLoad()
     {
-        return machine;
+        this.processors.forEach(p -> p.onLoad());
     }
 
-    public SystemManager getSystem()
+    @Override
+    public void onTick(long tick)
     {
-        return system;
+        this.processors.forEach(p -> p.onTick(tick));
+    }
+
+    @Override
+    public void onStop()
+    {
+        this.processors.forEach(p -> p.onStop());
     }
 }

@@ -11,7 +11,7 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import ua.ilnicki.jbgm.data.DataCluster;
 
@@ -27,13 +27,13 @@ public class DataClusterSerialiser implements JsonSerializer<DataCluster>, JsonD
     {
         final JsonArray rootJsonObject = new JsonArray();
 
-        HashMap<String, Object> dataSet;
+        LinkedHashMap<String, Object> dataSet;
 
         try
         {
             Field f = dataCluster.getClass().getDeclaredField("dataSet");
             f.setAccessible(true);
-            dataSet = (HashMap) f.get(dataCluster);
+            dataSet = (LinkedHashMap) f.get(dataCluster);
         } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
         {
             throw new JsonSyntaxException(e);
@@ -56,7 +56,7 @@ public class DataClusterSerialiser implements JsonSerializer<DataCluster>, JsonD
     @Override
     public DataCluster deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
     {
-        HashMap<String, Object> dataSet = new HashMap<>(json.getAsJsonArray().size());
+        LinkedHashMap<String, Object> dataSet = new LinkedHashMap<>(json.getAsJsonArray().size());
         
         for(JsonElement element : json.getAsJsonArray())
         {

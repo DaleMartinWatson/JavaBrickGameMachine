@@ -1,7 +1,8 @@
 package ua.ilnicki.jbgm.system;
 
+import ua.ilnicki.jbgm.BrickGameExecuter;
 import ua.ilnicki.jbgm.data.DataProvider;
-import ua.ilnicki.jbgm.data.DataWriteException;
+import ua.ilnicki.jbgm.machine.Machine;
 
 /**
  *
@@ -9,24 +10,38 @@ import ua.ilnicki.jbgm.data.DataWriteException;
  */
 public class SystemManager
 {
-    private final SaveManager saveManager;
-    private final ConfigManager configManager;
 
-    public SystemManager()
+    private ConfigManager configManager;
+    private SaveManager saveManager;
+    private ProcessManager processManager;
+    private Machine machine;
+    private final BrickGameExecuter executer;
+    private boolean isInitialized = false;
+
+    public SystemManager(BrickGameExecuter jge)
     {
-        DataProvider provider = null;
-        try
+        this.executer = jge;
+    }
+
+    public void init()
+    {
+        if (!this.isInitialized)
         {
-            provider = DataProvider.createDataProvider();
-        } 
-        catch (DataWriteException | ClassNotFoundException |
-               InstantiationException | IllegalAccessException ex)
-        {
-            System.exit(1);
+            DataProvider provider = DataProvider.createDataProvider();;
+
+            if (provider == null)
+            {
+                this.executer.stop(new Exception("Can`t create Data Provider."));
+            }
+
+            this.configManager = new ConfigManager(provider);
+            this.saveManager = new SaveManager(provider);
+
+            machine = new Machine();
+            
+            this.processManager = new ProcessManager(this);
         }
-        
-        this.configManager = new ConfigManager(provider);
-        this.saveManager = new SaveManager(provider);
+        this.isInitialized = true;
     }
 
     public SaveManager getSaveManager()
@@ -37,6 +52,28 @@ public class SystemManager
     public ConfigManager getConfigManager()
     {
         return configManager;
+    }
+
+    public ProcessManager getProcessManager()
+    {
+        return processManager;
+    }
+
+    public Machine getMachine()
+    {
+        return machine;
+    }
+
+    public void stop()
+    {
+        this.configManager.save();
+        this.executer.stop();
+    }
+    
+    public void stop(Exception e)
+    {
+        this.configManager.save();
+        this.executer.stop(e);
     }
 
 }

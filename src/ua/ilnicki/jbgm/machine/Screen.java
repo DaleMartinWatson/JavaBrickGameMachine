@@ -17,12 +17,17 @@ public final class Screen extends PixelMatrix implements Positionable
     private Field field;
     private Point position;
 
-    public Screen(int width, int height, Field field)
+    public Screen(int width, int height)
     {
         super(1, 1);
 
         this.width = width;
         this.height = height;
+    }
+    
+    public Screen(int width, int height, Field field)
+    {
+        this(width, height);
         this.setField(field);
     }
     

@@ -1,6 +1,10 @@
 package ua.ilnicki.jbgm.game;
 
-import ua.ilnicki.jbgm.system.BrickGameProcessor;
+import ua.ilnicki.jbgm.machine.Field;
+import ua.ilnicki.jbgm.machine.Keyboard.KeyboardPasser;
+import ua.ilnicki.jbgm.machine.Machine.Parameters;
+import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
+import ua.ilnicki.jbgm.system.Module;
 import ua.ilnicki.jbgm.system.GameManager;
 import ua.ilnicki.jbgm.system.SaveManager;
 
@@ -8,23 +12,31 @@ import ua.ilnicki.jbgm.system.SaveManager;
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public interface Game extends BrickGameProcessor
+public interface Game extends Module
 {
     /**
      *
-     * @param gm
+     * @param gameManager
+     * @param field
+     * @param helper
+     * @param keyboardPasser
+     * @param parameters
+     * @param saveManager
      */
-    public void init(GameManager gm);
+    public void init(GameManager gameManager, 
+                     Field field, 
+                     PixelMatrix helper, 
+                     KeyboardPasser keyboardPasser, 
+                     Parameters parameters, 
+                     SaveManager saveManager);
     
     /**
      *
-     * @param sm
      */
-    public void save(SaveManager sm);
+    public void save();
     
     /**
      *
-     * @param sm
      */
-    public void recover(SaveManager sm);
+    public void recover();
 }

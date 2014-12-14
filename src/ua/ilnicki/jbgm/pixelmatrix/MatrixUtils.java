@@ -11,7 +11,6 @@ public class MatrixUtils
 
     public enum ReflectType
     {
-
         RT_HORIZONTALLY,
         RT_VERTICALLY,
         RT_ON_MAJOR_DIAGONAL,

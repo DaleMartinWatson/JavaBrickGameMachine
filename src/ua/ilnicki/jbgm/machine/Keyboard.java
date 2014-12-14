@@ -70,13 +70,13 @@ public class Keyboard
         this.ctrlKeysMap = new HashMap<>();
         for (CtrlKey key : CtrlKey.values())
         {
-            this.ctrlKeysMap.put(key, 0);
+            this.ctrlKeysMap.put(key, -1);
         }
 
         this.sysKeysMap = new HashMap<>();
         for (SysKey key : SysKey.values())
         {
-            this.sysKeysMap.put(key, 0);
+            this.sysKeysMap.put(key, -1);
         }
     }
 

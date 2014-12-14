@@ -1,7 +1,7 @@
 package ua.ilnicki.jbgm.data;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -9,25 +9,40 @@ import java.util.HashMap;
  */
 public class DataCluster implements Serializable
 {
-
-    protected HashMap<String, Object> dataSet;
+    private static final long serialVersionUID = 750L;
+    
+    protected LinkedHashMap<String, Object> dataSet;
 
     public DataCluster()
     {
-        this.dataSet = new HashMap<>();
+        this.dataSet = new LinkedHashMap<>();
     }
 
-    public DataCluster(HashMap dataSet)
+    public DataCluster(LinkedHashMap dataSet)
     {
-        this.dataSet = dataSet;
+        if (dataSet != null)
+        {
+            this.dataSet = dataSet;
+        }
+        else
+        {
+            this.dataSet = new LinkedHashMap<>();
+        }
     }
-    
+
     public DataCluster(DataCluster dataCluster)
     {
-        this.dataSet = dataCluster.dataSet;
+        if (dataCluster != null)
+        {
+            this.dataSet = dataCluster.dataSet;
+        }
+        else
+        {
+            this.dataSet = new LinkedHashMap<>();
+        }
     }
 
-    public void setValue(String key, Object value)
+    public void putValue(String key, Object value)
     {
         this.dataSet.put(key, value);
     }
@@ -39,7 +54,13 @@ public class DataCluster implements Serializable
 
     public <T> T getValue(String key, Class<T> type)
     {
-        return type.cast(this.getValue(key));
+        try
+        {
+            return type.cast(this.getValue(key));
+        } catch (Exception e)
+        {
+            throw new DataCastException(e.getMessage());
+        }
     }
 
     public int getIntValue(String key)
@@ -56,7 +77,7 @@ public class DataCluster implements Serializable
     {
         return this.getValue(key, String.class);
     }
-    
+
     public String getValueAsString(String key)
     {
         return this.dataSet.get(key).toString();
@@ -72,13 +93,13 @@ public class DataCluster implements Serializable
         return this.dataSet.containsKey(key)
                 && type.isInstance(this.dataSet.get(key));
     }
-    
+
     public String[] getKeys()
     {
         String[] keys = this.dataSet.keySet().toArray(new String[0]);
         return keys != null ? keys : new String[0];
     }
-    
+
     public void close()
     {
         this.dataSet = null;

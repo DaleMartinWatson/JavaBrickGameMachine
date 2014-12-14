@@ -1,12 +1,14 @@
 package ua.ilnicki.jbgm.system.processors;
 
 import ua.ilnicki.jbgm.data.DataCluster;
-import ua.ilnicki.jbgm.machine.BrickGameBoolParameter;
-import ua.ilnicki.jbgm.machine.BrickGameIntParameter;
+import ua.ilnicki.jbgm.machine.BoolParameter;
+import ua.ilnicki.jbgm.machine.IntParameter;
 import ua.ilnicki.jbgm.machine.Keyboard;
 import ua.ilnicki.jbgm.machine.Keyboard.SysKey;
+import ua.ilnicki.jbgm.machine.Machine;
 import ua.ilnicki.jbgm.system.BrickGameProcessor;
 import ua.ilnicki.jbgm.system.ProcessManager;
+import ua.ilnicki.jbgm.system.SystemManager;
 
 /**
  *
@@ -15,21 +17,25 @@ import ua.ilnicki.jbgm.system.ProcessManager;
 public class SysKeysProcessor implements BrickGameProcessor
 {
     private Keyboard keyboard;
-    private BrickGameIntParameter volume;
-    private BrickGameBoolParameter pause;
+    private IntParameter volume;
+    private BoolParameter pause;
     private DataCluster saveCluster;
+    private SystemManager systemManager;
     
     @Override
-    public void init(ProcessManager pm)
+    public void init(ProcessManager procesManager, SystemManager systemManager)
     {
-        this.keyboard = pm.getMachine().getKeyboard();
-        this.volume = pm.getMachine().getParameters().volume;
-        this.pause = pm.getMachine().pause;
-        this.saveCluster = pm.getSystem().getSaveManager().getCluster(this);
+        Machine machine = systemManager.getMachine();
+        
+        this.keyboard = machine.getKeyboard();
+        this.volume = machine.volume;
+        this.pause = machine.pause;
+        this.saveCluster = systemManager.getSaveManager().getCluster(this);
+        this.systemManager = systemManager;
     }
 
     @Override
-    public void onLaunch()
+    public void onLoad()
     {
         if(this.saveCluster.valueExists("volume", Integer.class))
         {
@@ -38,7 +44,7 @@ public class SysKeysProcessor implements BrickGameProcessor
     }
 
     @Override
-    public void onTick()
+    public void onTick(long tick)
     {
         if(this.keyboard.isSysKeyDown(SysKey.SOUND))
         {
@@ -49,11 +55,16 @@ public class SysKeysProcessor implements BrickGameProcessor
         {
             this.pause.toggle();
         }
+        
+        if(this.keyboard.isSysKeyDown(SysKey.ONOFF))
+        {
+            this.systemManager.stop();
+        }
     }
 
     @Override
     public void onStop()
     {
-        this.saveCluster.setValue("volume", this.volume.get());
+        this.saveCluster.putValue("volume", this.volume.get());
     }   
 }

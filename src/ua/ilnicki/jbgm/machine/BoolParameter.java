@@ -6,16 +6,16 @@ import java.io.Serializable;
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameBoolParameter implements Serializable
+public class BoolParameter implements Serializable
 {
     private boolean value;
 
-    public BrickGameBoolParameter()
+    public BoolParameter()
     {
         this(false);
     }
     
-    public BrickGameBoolParameter(boolean value)
+    public BoolParameter(boolean value)
     {
         this.value = value;
     }

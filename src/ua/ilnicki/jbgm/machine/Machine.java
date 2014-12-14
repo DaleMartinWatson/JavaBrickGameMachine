@@ -7,42 +7,38 @@ import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameMachine
+public class Machine
 {
+
     public static class Parameters
     {
-        /**
-         *
-         */
-        public final BrickGameIntParameter score;
 
         /**
          *
          */
-        public final BrickGameIntParameter hiscore;
+        public final IntParameter score;
 
         /**
          *
          */
-        public final BrickGameIntParameter speed;
+        public final IntParameter hiscore;
 
         /**
          *
          */
-        public final BrickGameIntParameter level;
+        public final IntParameter speed;
 
         /**
          *
          */
-        public final BrickGameIntParameter volume;
+        public final IntParameter level;
 
         private Parameters()
         {
-            this.score = new BrickGameIntParameter(0, 999999);
-            this.hiscore = new BrickGameIntParameter(0, 999999);
-            this.speed = new BrickGameIntParameter(0, 9);
-            this.level = new BrickGameIntParameter(0, 9);
-            this.volume = new BrickGameIntParameter(0, 3);
+            this.score = new IntParameter(0, 999999);
+            this.hiscore = new IntParameter(0, 999999);
+            this.speed = new IntParameter(0, 10);
+            this.level = new IntParameter(0, 10);
         }
     }
 
@@ -54,12 +50,17 @@ public class BrickGameMachine
     /**
      *
      */
-    public final BrickGameBoolParameter pause;
+    public final IntParameter volume;
 
     /**
      *
      */
-    public final Keyboard keyboard;
+    public final BoolParameter pause;
+
+    /**
+     *
+     */
+    private final Keyboard keyboard;
 
     /**
      *
@@ -75,25 +76,27 @@ public class BrickGameMachine
      *
      */
     private final Screen screen;
-    
+
     /**
      *
      */
     private final PixelMatrix helper;
 
-    public BrickGameMachine()
+    public Machine()
     {
         this.parameters = new Parameters();
-        this.pause = new BrickGameBoolParameter(false);
+        
+        this.volume = new IntParameter(0, 3);
+        this.pause = new BoolParameter(false);
 
         this.keyboard = new Keyboard();
         this.keyboardPasser = this.keyboard.getKeyboardPasser();
 
-        this.field = new Field(20, 10);
-        this.screen = new Screen(20, 10, this.field);
+        this.field = new Field(10, 20);
+        this.screen = new Screen(10, 20, this.field);
         this.helper = new PixelMatrix(4, 4);
     }
-    
+
     public Parameters getParameters()
     {
         return parameters;
@@ -118,13 +121,13 @@ public class BrickGameMachine
     {
         return screen;
     }
-    
+
     public PixelMatrix getHelper()
     {
         return this.helper;
     }
-    
-    public void recreateField(int height, int width) 
+
+    public void recreateField(int height, int width)
     {
         this.field = new Field(height, width);
         this.screen.setField(this.field);

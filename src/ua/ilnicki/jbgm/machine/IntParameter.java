@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Класс предназначен для хранения параметров, содержащих в себе целые положительные числа с ограничением, при переполнении сбрасывающиеся в 0.
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public class BrickGameIntParameter implements Serializable
+public class IntParameter implements Serializable
 {
     private int value = 0;
     private final int minValue;
@@ -15,12 +15,12 @@ public class BrickGameIntParameter implements Serializable
     /**
      * Создает объект с заданным максимальным значениеями и минимальным, равным нулю.
      */
-    public BrickGameIntParameter()
+    public IntParameter()
     {
         this(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
     
-    public BrickGameIntParameter(int maxValue)
+    public IntParameter(int maxValue)
     {
         this(Integer.MIN_VALUE, maxValue);
     }
@@ -30,7 +30,7 @@ public class BrickGameIntParameter implements Serializable
      * @param minValue Целое число, ограничивающее минимальное значение параметра (включительно).
      * @param maxValue Целое число, ограничивающее максимальное значение параметра (включительно).
      */
-    public BrickGameIntParameter(int minValue, int maxValue)
+    public IntParameter(int minValue, int maxValue)
     {
         this.minValue = minValue;
         this.maxValue = maxValue;
@@ -105,7 +105,7 @@ public class BrickGameIntParameter implements Serializable
         if (getClass() != obj.getClass())
             return false;
         
-        final BrickGameIntParameter other = (BrickGameIntParameter) obj;
+        final IntParameter other = (IntParameter) obj;
         return this.value == other.value;
     }
 }

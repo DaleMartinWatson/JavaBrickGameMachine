@@ -35,8 +35,15 @@ public final class BaseDataProvider implements DataProvider
 
         try
         {
-            dataDir.mkdirs();
-            this.dataPath = Paths.get(dataDir.getCanonicalPath());
+            if(dataDir.isDirectory())
+            {
+                dataDir.mkdirs();
+                this.dataPath = Paths.get(dataDir.getCanonicalPath());
+            }
+            else
+            {
+                throw new DataWriteException("Data storage path is file.");
+            }
         } catch (SecurityException | IOException se)
         {
             throw new DataWriteException(se);

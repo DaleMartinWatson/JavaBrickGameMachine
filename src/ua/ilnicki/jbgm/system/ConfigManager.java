@@ -1,10 +1,7 @@
 package ua.ilnicki.jbgm.system;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.data.DataProvider;
 import ua.ilnicki.jbgm.data.DataWriteException;
@@ -19,12 +16,12 @@ public final class ConfigManager
     
     private final DataProvider dataProvider;
     private final DataCluster mainDataCluster;
-    private final HashMap<String, DataCluster> dataClusterCache;
+    private final LinkedHashMap<String, DataCluster> dataClusterCache;
 
     public ConfigManager(DataProvider dataProvider)
     {
         this.dataProvider = dataProvider;
-        this.dataClusterCache = new HashMap<>();
+        this.dataClusterCache = new LinkedHashMap<>();
         this.mainDataCluster = this.getCluster(MAIN_CONFIG_FILE_NAME);
     }
 
@@ -36,6 +33,11 @@ public final class ConfigManager
     public DataCluster getCluster(Object obj)
     {
         return this.getCluster(obj.getClass().getName());
+    }
+    
+    public DataCluster getCluster(Class clazz)
+    {
+        return this.getCluster(clazz.getName());
     }
 
     public void save()

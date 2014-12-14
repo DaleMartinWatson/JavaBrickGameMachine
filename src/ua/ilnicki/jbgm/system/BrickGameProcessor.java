@@ -4,26 +4,12 @@ package ua.ilnicki.jbgm.system;
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}
  */
-public interface BrickGameProcessor
+public interface BrickGameProcessor extends Module
 {
     /**
      *
-     * @param pm
+     * @param procesManager
+     * @param systemManager
      */
-    public void init(ProcessManager pm);
-
-    /**
-     *
-     */
-    public void onLaunch();
-    
-    /**
-     *
-     */
-    public void onTick();
-
-    /**
-     *
-     */
-    public void onStop();
+    public void init(ProcessManager procesManager, SystemManager systemManager);
 }

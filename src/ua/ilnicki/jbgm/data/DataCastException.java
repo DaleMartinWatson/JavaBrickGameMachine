@@ -1,4 +1,4 @@
-package ua.ilnicki.jbgm.system;
+package ua.ilnicki.jbgm.data;
 
 /**
  *

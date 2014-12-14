@@ -17,32 +17,32 @@ public interface DataProvider
 
     public void writeData(String clusterName, DataCluster dataCluster) throws DataWriteException;
 
-    public static DataProvider createDataProvider() throws DataWriteException,
-                                                           ClassNotFoundException,
-                                                           InstantiationException,
-                                                           IllegalAccessException
+    public static DataProvider createDataProvider()
     {
-        DataProvider provider;
-
+        DataProvider provider = null;
+        
+        try
+        {
             provider = new BaseDataProvider();
+            
             DataCluster preConfigCluster = provider.readData("config");
 
             String path = provider.getLocation();
-            if (preConfigCluster.valueExists("DataPath") &&
-                    !preConfigCluster.getStringValue("DataPath")
-                            .equals(provider.getLocation()))
+            if (preConfigCluster.valueExists("DataPath"))
             {
                 path = preConfigCluster.getStringValue("DataPath");
             }
-            
-            if (preConfigCluster.valueExists("DataProvider") &&
-                    !preConfigCluster.getStringValue("DataProvider")
-                            .equals(provider.getClass().getName()))
+
+            if (preConfigCluster.valueExists("DataProvider"))
             {
                 provider = (DataProvider) Class.forName(preConfigCluster.getStringValue("DataProvider")).newInstance();
             }
-            
+
             provider.setLocation(path);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | DataWriteException e)
+        {
+            
+        }
 
         return provider;
     }
