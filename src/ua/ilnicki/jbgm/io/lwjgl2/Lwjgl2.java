@@ -65,22 +65,6 @@ public class Lwjgl2 implements Drawer, KeyReader
 
         this.ctrlKeyMap = loadKeyMap("CtrlKeyMap", CtrlKey.class);
         this.sysKeyMap = loadKeyMap("SysKeyMap", SysKey.class);
-        
-        /*this.ctrlKeyMap = new HashMap<>();
-        this.ctrlKeyMap.put(KEY_UP, CtrlKey.UP);
-        this.ctrlKeyMap.put(KEY_RIGHT, CtrlKey.RIGHT);
-        this.ctrlKeyMap.put(KEY_DOWN, CtrlKey.DOWN);
-        this.ctrlKeyMap.put(KEY_LEFT, CtrlKey.LEFT);
-        this.ctrlKeyMap.put(KEY_SPACE, CtrlKey.ENTER);
-        
-        this.config.putValue("CtrlKeyMap", this.ctrlKeyMap);
-
-        this.sysKeyMap = new HashMap<>();
-        this.sysKeyMap.put(KEY_RETURN, SysKey.START);
-        this.sysKeyMap.put(KEY_TAB, SysKey.SOUND);
-        this.sysKeyMap.put(KEY_ESCAPE, SysKey.ONOFF);
-        
-        this.config.putValue("SysKeyMap", this.sysKeyMap);*/
 
         Display.setTitle("Brick Game");
         Display.setFullscreen(false);
@@ -92,8 +76,8 @@ public class Lwjgl2 implements Drawer, KeyReader
         Display.setVSyncEnabled(true);
         Display.create();
         
-        glEnable(GL_TEXTURE_2D);
-        glDisable(GL_DEPTH_TEST);
+        /*glEnable(GL_TEXTURE_2D);
+        glDisable(GL_DEPTH_TEST);*/
         
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -144,8 +128,6 @@ public class Lwjgl2 implements Drawer, KeyReader
                 drawScreen();
             }
         }
-        
-        System.out.println(this.machine.getParameters().score.get());
     }
 
     @Override

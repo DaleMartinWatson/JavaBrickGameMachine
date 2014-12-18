@@ -3,6 +3,7 @@ package ua.ilnicki.jbgm.system;
 import ua.ilnicki.jbgm.BrickGameExecuter;
 import ua.ilnicki.jbgm.data.DataProvider;
 import ua.ilnicki.jbgm.machine.Machine;
+import ua.ilnicki.jbgm.pixelmatrix.PixelMatrixLoader;
 
 /**
  *
@@ -10,7 +11,7 @@ import ua.ilnicki.jbgm.machine.Machine;
  */
 public class SystemManager
 {
-
+    private DataProvider provider;
     private ConfigManager configManager;
     private SaveManager saveManager;
     private ProcessManager processManager;
@@ -27,7 +28,7 @@ public class SystemManager
     {
         if (!this.isInitialized)
         {
-            DataProvider provider = DataProvider.createDataProvider();;
+            provider = DataProvider.createDataProvider();;
 
             if (provider == null)
             {
@@ -62,6 +63,11 @@ public class SystemManager
     public Machine getMachine()
     {
         return machine;
+    }
+    
+    public PixelMatrixLoader createMatrixLoader(String packageName)
+    {
+        return PixelMatrixLoader.create(packageName, this.provider);
     }
 
     public void stop()

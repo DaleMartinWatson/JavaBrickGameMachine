@@ -1,6 +1,7 @@
 package ua.ilnicki.jbgm.data;
 
 import ua.ilnicki.jbgm.data.base.BaseDataProvider;
+import ua.ilnicki.jbgm.pixelmatrix.PixelMatrixLoader;
 
 /**
  *

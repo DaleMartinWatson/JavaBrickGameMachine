@@ -4,7 +4,6 @@ import ua.ilnicki.jbgm.game.Game;
 import ua.ilnicki.jbgm.machine.Field;
 import ua.ilnicki.jbgm.machine.Keyboard.CtrlKey;
 import ua.ilnicki.jbgm.machine.Keyboard.KeyboardPasser;
-import ua.ilnicki.jbgm.machine.Machine;
 import ua.ilnicki.jbgm.machine.Machine.Parameters;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 import ua.ilnicki.jbgm.system.GameManager;
@@ -32,13 +31,13 @@ public class TestGame implements Game
     @Override
     public void onLoad()
     {
-
+        
     }
 
     @Override
     public void onTick(long tick)
     {
-       // System.out.println(tick + " " + this.keyboardPasser.isKeyDown(CtrlKey.UP));
+       System.out.println(tick + " " + this.keyboardPasser.keyDownTicksCount(CtrlKey.UP));
     }
 
     @Override

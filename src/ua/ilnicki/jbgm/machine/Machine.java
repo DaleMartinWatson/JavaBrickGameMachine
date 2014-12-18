@@ -37,8 +37,8 @@ public class Machine
         {
             this.score = new IntParameter(0, 999999);
             this.hiscore = new IntParameter(0, 999999);
-            this.speed = new IntParameter(0, 10);
-            this.level = new IntParameter(0, 10);
+            this.speed = new IntParameter(1, 10);
+            this.level = new IntParameter(1, 10);
         }
     }
 

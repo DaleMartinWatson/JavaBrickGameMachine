@@ -50,7 +50,7 @@ public class Lwjgl2_squares implements Drawer, KeyReader
         this.ctrlKeyMap.put(KEY_RIGHT, CtrlKey.RIGHT);
         this.ctrlKeyMap.put(KEY_DOWN, CtrlKey.DOWN);
         this.ctrlKeyMap.put(KEY_LEFT, CtrlKey.LEFT);
-        this.ctrlKeyMap.put(KEY_SPACE, CtrlKey.ENTER);
+        this.ctrlKeyMap.put(KEY_SPACE, CtrlKey.ROTATE);
 
         this.sysKeyMap = new HashMap<>();
         this.sysKeyMap.put(KEY_RETURN, SysKey.START);
@@ -116,8 +116,6 @@ public class Lwjgl2_squares implements Drawer, KeyReader
                 drawScreen();
             }
         }
-        
-        System.out.println(this.machine.getParameters().score.get());
     }
 
     @Override

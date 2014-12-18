@@ -16,6 +16,8 @@ public class Keyboard
     {
         /**
          * Клавиша UP
+         *//**
+         * Клавиша UP
          */
         UP,
         /**
@@ -33,7 +35,7 @@ public class Keyboard
         /**
          * Клавиша ROTATE DIRECTION
          */
-        ENTER
+        ROTATE
     }
 
     /**
@@ -159,21 +161,14 @@ public class Keyboard
      */
     public KeyboardPasser getKeyboardPasser()
     {
-        return new KeyboardPasser(this);
+        return new KeyboardPasser();
     }
 
     /**
      * Класс, предназначеный для передачи значений клавиатуры во внешние приложения, подключаемые к машине.
      */
-    public static class KeyboardPasser
+    public class KeyboardPasser
     {
-        private final Keyboard kb;
-
-        private KeyboardPasser(Keyboard kb)
-        {
-            this.kb = kb;
-        }
-        
         /**
          * Метод проверяет, нажата ли управляющая клавиша.
          * @param key Требуемая клавиша - объект перечисления {@link ua.ilnicki.jbgm.machine.Keyboard.CtrlKey}.
@@ -181,7 +176,12 @@ public class Keyboard
          */
         public boolean isKeyDown(CtrlKey key)
         {
-            return kb.isCtrlKeyDown(key);
+            return Keyboard.this.isCtrlKeyDown(key);
+        }
+        
+        public int keyDownTicksCount(CtrlKey key)
+        {
+            return Keyboard.this.ctrlKeyDownTicksCount(key);
         }
     }
 }
