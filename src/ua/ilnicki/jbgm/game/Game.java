@@ -22,13 +22,15 @@ public interface Game extends Module
      * @param keyboardPasser
      * @param parameters
      * @param saveManager
+     * @param arg
      */
     public void init(GameManager gameManager, 
                      Field field, 
                      PixelMatrix helper, 
                      KeyboardPasser keyboardPasser, 
                      Parameters parameters, 
-                     SaveManager saveManager);
+                     SaveManager saveManager,
+                     int arg);
     
     /**
      *

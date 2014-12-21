@@ -30,7 +30,7 @@ public class SysKeysProcessor implements BrickGameProcessor
         this.keyboard = machine.getKeyboard();
         this.volume = machine.volume;
         this.pause = machine.pause;
-        this.saveCluster = systemManager.getSaveManager().getCluster(this);
+        this.saveCluster = systemManager.getConfigManager().getCluster(this);
         this.systemManager = systemManager;
     }
 
@@ -46,12 +46,12 @@ public class SysKeysProcessor implements BrickGameProcessor
     @Override
     public void onTick(long tick)
     {
-        if(this.keyboard.isSysKeyDown(SysKey.SOUND))
+        if(this.keyboard.sysKeyDownTicksCount(SysKey.SOUND) == 0)
         {
             this.volume.inc();
         }
         
-        if(this.keyboard.isSysKeyDown(SysKey.START))
+        if(this.keyboard.sysKeyDownTicksCount(SysKey.START) == 0)
         {
             this.pause.toggle();
         }

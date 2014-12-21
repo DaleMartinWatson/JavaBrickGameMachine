@@ -3,7 +3,6 @@ package ua.ilnicki.jbgm.pixelmatrix;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import ua.ilnicki.jbgm.data.DataProvider;
 
 /**
  *
@@ -21,12 +20,12 @@ public class ExternalPixelMatrixLoader extends PixelMatrixLoader
     }
 
     @Override
-    public PixelMatrix load(String textureName)
+    protected PixelMatrix read(String spriteName)
     {
-        File texture = new File(this.texcturesPackage, textureName + ".pmt");
+        File texture = new File(this.texcturesPackage, spriteName + ".pmt");
         try
         {
-            return load(new FileInputStream(texture));
+            return read(new FileInputStream(texture));
         }
         catch (FileNotFoundException ex)
         {

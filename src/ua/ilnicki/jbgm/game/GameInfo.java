@@ -55,5 +55,17 @@ public interface GameInfo
      *
      * @return
      */
+    public int getBufferWidth();
+    
+    /**
+     *
+     * @return
+     */
+    public int getBufferHeight();
+    
+    /**
+     *
+     * @return
+     */
     public Class<? extends Game> getGameClass();
 }

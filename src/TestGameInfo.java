@@ -2,6 +2,9 @@
 import ua.ilnicki.jbgm.game.Game;
 import ua.ilnicki.jbgm.game.GameInfo;
 import ua.ilnicki.jbgm.game.test.TestGame;
+import ua.ilnicki.jbgm.pixelmatrix.MatrixUtils;
+import ua.ilnicki.jbgm.pixelmatrix.Pixel;
+import static ua.ilnicki.jbgm.pixelmatrix.Pixel.*;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 
 /*
@@ -15,6 +18,53 @@ import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
  */
 public class TestGameInfo implements GameInfo
 {
+
+    private final PixelMatrix logo = MatrixUtils.makeFromArray(new Pixel[][]
+    {
+        {
+            BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK
+        }
+    });
+
+    private final PixelMatrix preview = MatrixUtils.makeFromArray(new Pixel[][]
+    {
+        {
+            BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },   
+        {   
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },   
+        {   
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },   
+        {   
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK,  null,  null,  null,  null,  null,  null,  null,  null, BLACK
+        },
+        {
+            BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK
+        }
+    });
 
     @Override
     public String getName()
@@ -49,13 +99,25 @@ public class TestGameInfo implements GameInfo
     @Override
     public PixelMatrix getLogo()
     {
-        return null;
+        return this.logo;
     }
 
     @Override
     public PixelMatrix getPreview()
     {
-        return null;
+        return this.preview;
+    }
+
+    @Override
+    public int getBufferWidth()
+    {
+        return 10;
+    }
+
+    @Override
+    public int getBufferHeight()
+    {
+        return 20;
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ua.ilnicki.jbgm.pixelmatrix.Pixel;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
+import ua.ilnicki.jbgm.pixelmatrix.Point;
 
 /**
  *
@@ -57,6 +58,12 @@ public final class Field extends PixelMatrix
                 return null;
             }
         }
+    }
+
+    @Override
+    public Pixel getPixel(Point point)
+    {
+        return this.getPixel(point.getX(), point.getY());
     }
     
     

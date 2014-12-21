@@ -12,25 +12,37 @@ import ua.ilnicki.jbgm.pixelmatrix.Positionable;
 public final class Layer extends PixelMatrix implements Positionable
 {
     private Point position;
+    @SuppressWarnings("FieldNameHidesFieldInSuperclass")
+    private PixelMatrix pixelMatrix;
     
     public Layer(PixelMatrix pm)
     {
-        super(pm);
-        
+        super(1, 1);
         this.position = new Point(0, 0);
+        this.pixelMatrix = pm;
     }
     
     public Layer(int width, int height)
     {
-        super(width, height);
-        
-        this.position = new Point(0, 0);
+        this(new PixelMatrix(width, height));
+    }
+
+    @Override
+    public int getWidth()
+    {
+        return pixelMatrix.getWidth();
+    }
+
+    @Override
+    public int getHeight()
+    {
+        return pixelMatrix.getHeight();
     }
 
     @Override
     public void setPixel(int x, int y, Pixel value)
     {
-        super.setPixel(x - this.position.getX(), y - this.position.getY(), value);
+        this.pixelMatrix.setPixel(x - this.position.getX(), y - this.position.getY(), value);
     }
 
     @Override
@@ -38,18 +50,36 @@ public final class Layer extends PixelMatrix implements Positionable
     {
         try
         {
-            return super.getPixel(x - this.position.getX(), y - this.position.getY());
+            return this.pixelMatrix.getPixel(x - this.position.getX(), y - this.position.getY());
         }
         catch(Exception e)
         {
             return null;
         }
     }
+
+    @Override
+    public Pixel getPixel(Point point)
+    {
+        return this.getPixel(point.getX(), point.getY());
+    }
+
+    @Override
+    public void setPixel(Point point, Pixel value)
+    {
+        this.setPixel(point.getX(), point.getY(), value);
+    }
+
+    @Override
+    public String toString()
+    {
+        return pixelMatrix.toString();
+    }
     
     @Override
     public int getPositionX()
     {
-        return position.getX();
+        return this.position.getX();
     }
         
     @Override
@@ -61,7 +91,7 @@ public final class Layer extends PixelMatrix implements Positionable
     @Override
     public int getPositionY()
     {
-        return position.getY();
+        return this.position.getY();
     }
 
     @Override
@@ -87,5 +117,18 @@ public final class Layer extends PixelMatrix implements Positionable
     public Point getPositionPoint()
     {
         return this.position;
+    }
+    
+    public PixelMatrix getPixelMatrix()
+    {
+        return this.pixelMatrix;
+    }
+    
+    public void setPixelMatrix(PixelMatrix pm)
+    {
+        if(pm != null)
+            this.pixelMatrix = pm;
+        else
+            this.pixelMatrix = new PixelMatrix(1, 1);
     }
 }

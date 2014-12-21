@@ -11,16 +11,16 @@ public class InternalPixelMatrixLoader extends PixelMatrixLoader
     private final ClassLoader classLoader;
     private final String packageName;
     
-    protected InternalPixelMatrixLoader(String packageName, GameInfo gameInfo)
+    protected InternalPixelMatrixLoader(String packageName, Class clazz)
     {
         this.packageName = packageName;
-        this.classLoader = gameInfo.getClass().getClassLoader();
+        this.classLoader = clazz.getClassLoader();
     }
     
     @Override
-    public PixelMatrix load(String textureName)
+    protected PixelMatrix read(String spriteName)
     {
-        String fullName = String.format("sprites/%s/%s.pmt", this.packageName, textureName);
-        return load(classLoader.getResourceAsStream(fullName));
+        String fullName = String.format("sprites/%s/%s.pmt", this.packageName, spriteName);
+        return read(classLoader.getResourceAsStream(fullName));
     }
 }

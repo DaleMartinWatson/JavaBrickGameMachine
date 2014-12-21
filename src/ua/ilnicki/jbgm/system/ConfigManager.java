@@ -40,7 +40,7 @@ public final class ConfigManager
         return this.getCluster(clazz.getName());
     }
 
-    public void save()
+    public void saveAll()
     {
         for(Entry<String, DataCluster> entry : this.dataClusterCache.entrySet())
         {

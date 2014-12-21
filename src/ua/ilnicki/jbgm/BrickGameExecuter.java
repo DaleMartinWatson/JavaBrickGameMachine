@@ -67,16 +67,11 @@ public class BrickGameExecuter
         });
     }
 
-    public void stop()
-    {
-        this.stop(0);
-    }
-
     public void stop(Exception ex)
     {
         try (PrintWriter pw = new PrintWriter(new File("stacktrace.log")))
         {
-            this.stop(1);
+            this.stop();
             ex.printStackTrace(pw);
         } catch (Exception e)
         {
@@ -86,11 +81,10 @@ public class BrickGameExecuter
         ex.printStackTrace();
     }
 
-    private void stop(int i)
+    public void stop()
     {
         this.modules.forEach(m -> m.onStop());
         this.tp.stop();
-        System.exit(i);
     }
 
     public static void main(String[] args) throws DataWriteException
@@ -99,6 +93,5 @@ public class BrickGameExecuter
 
         jbgm.init();
         jbgm.run();
-        jbgm.stop();
     }
 }

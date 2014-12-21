@@ -29,9 +29,9 @@ public interface DataProvider
             DataCluster preConfigCluster = provider.readData("config");
 
             String path = provider.getLocation();
-            if (preConfigCluster.valueExists("DataPath"))
+            if (preConfigCluster.valueExists("WorkingPath"))
             {
-                path = preConfigCluster.getStringValue("DataPath");
+                path = preConfigCluster.getStringValue("WorkingPath") + "/data/";
             }
 
             if (preConfigCluster.valueExists("DataProvider"))

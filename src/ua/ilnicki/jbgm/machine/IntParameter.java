@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class IntParameter implements Serializable
 {
-    private int value = 0;
+    private int value;
     private final int minValue;
     private final int maxValue;
 
@@ -34,6 +34,7 @@ public class IntParameter implements Serializable
     {
         this.minValue = minValue;
         this.maxValue = maxValue;
+        this.value = this.minValue;
     }
 
     /**

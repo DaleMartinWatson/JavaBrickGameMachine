@@ -127,9 +127,14 @@ public class Machine
         return this.helper;
     }
 
-    public void recreateField(int height, int width)
+    public void recreateField(int width, int height)
     {
-        this.field = new Field(height, width);
+        setField(new Field(width, height));
+    }
+    
+    public void setField(Field field)
+    {
+        this.field = field;
         this.screen.setField(this.field);
     }
 }

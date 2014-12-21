@@ -72,14 +72,13 @@ public class SystemManager
 
     public void stop()
     {
-        this.configManager.save();
         this.executer.stop();
+        this.configManager.saveAll();
     }
     
     public void stop(Exception e)
     {
-        this.configManager.save();
         this.executer.stop(e);
+        this.configManager.saveAll();
     }
-
 }
