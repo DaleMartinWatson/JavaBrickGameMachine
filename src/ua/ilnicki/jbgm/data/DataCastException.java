@@ -7,10 +7,17 @@ package ua.ilnicki.jbgm.data;
 public class DataCastException extends ClassCastException
 {
 
+    /**
+     *
+     */
     public DataCastException()
     {
     }
 
+    /**
+     *
+     * @param s
+     */
     public DataCastException(String s)
     {
         super(s);

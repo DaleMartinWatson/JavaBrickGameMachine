@@ -38,6 +38,11 @@ public class DefaultGameLauncher implements Module
 
     private List<GameInfo> gameInfoList;
 
+    /**
+     *
+     * @param gameManager
+     * @param systemManager
+     */
     public void init(GameManager gameManager, SystemManager systemManager)
     {
         this.gameManager = gameManager;

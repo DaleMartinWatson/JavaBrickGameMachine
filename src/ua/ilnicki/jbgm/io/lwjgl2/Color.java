@@ -12,6 +12,12 @@ public class Color
     
     private float factor = 1.0f / 255;
 
+    /**
+     *
+     * @param red
+     * @param green
+     * @param blue
+     */
     public Color(int red, int green, int blue)
     {
         this.red = (byte) red;
@@ -19,31 +25,55 @@ public class Color
         this.blue = (byte) blue;
     }
 
+    /**
+     *
+     * @return
+     */
     public byte getR()
     {
         return red;
     }
 
+    /**
+     *
+     * @return
+     */
     public byte getG()
     {
         return green;
     }
 
+    /**
+     *
+     * @return
+     */
     public byte getB()
     {
         return blue;
     }
     
+    /**
+     *
+     * @return
+     */
     public float getFloatR()
     {
         return red * factor;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getFloatG()
     {
         return green * factor;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getFloatB()
     {
         return blue * factor;

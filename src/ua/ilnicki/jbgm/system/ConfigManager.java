@@ -18,6 +18,10 @@ public final class ConfigManager
     private final DataCluster mainDataCluster;
     private final LinkedHashMap<String, DataCluster> dataClusterCache;
 
+    /**
+     *
+     * @param dataProvider
+     */
     public ConfigManager(DataProvider dataProvider)
     {
         this.dataProvider = dataProvider;
@@ -25,21 +29,38 @@ public final class ConfigManager
         this.mainDataCluster = this.getCluster(MAIN_CONFIG_FILE_NAME);
     }
 
+    /**
+     *
+     * @return
+     */
     public DataCluster getMainCluster()
     {
         return this.mainDataCluster;
     }
     
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public DataCluster getCluster(Object obj)
     {
         return this.getCluster(obj.getClass().getName());
     }
     
+    /**
+     *
+     * @param clazz
+     * @return
+     */
     public DataCluster getCluster(Class clazz)
     {
         return this.getCluster(clazz.getName());
     }
 
+    /**
+     *
+     */
     public void saveAll()
     {
         for(Entry<String, DataCluster> entry : this.dataClusterCache.entrySet())

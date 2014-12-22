@@ -10,6 +10,9 @@ import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 public class Machine
 {
 
+    /**
+     *
+     */
     public static class Parameters
     {
 
@@ -82,6 +85,9 @@ public class Machine
      */
     private final PixelMatrix helper;
 
+    /**
+     *
+     */
     public Machine()
     {
         this.parameters = new Parameters();
@@ -97,41 +103,74 @@ public class Machine
         this.helper = new PixelMatrix(4, 4);
     }
 
+    /**
+     *
+     * @return
+     */
     public Parameters getParameters()
     {
         return parameters;
     }
 
+    /**
+     *
+     * @return
+     */
     public Keyboard getKeyboard()
     {
         return keyboard;
     }
 
+    /**
+     *
+     * @return
+     */
     public KeyboardPasser getKeyboardPasser()
     {
         return keyboardPasser;
     }
 
+    /**
+     *
+     * @return
+     */
     public Field getField()
     {
         return field;
     }
 
+    /**
+     *
+     * @return
+     */
     public Screen getScreen()
     {
         return screen;
     }
 
+    /**
+     *
+     * @return
+     */
     public PixelMatrix getHelper()
     {
         return this.helper;
     }
 
+    /**
+     *
+     * @param width
+     * @param height
+     */
     public void recreateField(int width, int height)
     {
         setField(new Field(width, height));
     }
     
+    /**
+     *
+     * @param field
+     */
     public void setField(Field field)
     {
         this.field = field;

@@ -4,8 +4,8 @@ import ua.ilnicki.jbgm.machine.Field;
 import ua.ilnicki.jbgm.machine.Keyboard.KeyboardPasser;
 import ua.ilnicki.jbgm.machine.Machine.Parameters;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
-import ua.ilnicki.jbgm.system.Module;
 import ua.ilnicki.jbgm.system.GameManager;
+import ua.ilnicki.jbgm.system.Module;
 import ua.ilnicki.jbgm.system.SaveManager;
 
 /**

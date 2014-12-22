@@ -1,6 +1,9 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
-import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.*;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.RT_HORIZONTALLY;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.RT_ON_MAJOR_DIAGONAL;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.RT_ON_MINOR_DIAGONAL;
+import static ua.ilnicki.jbgm.pixelmatrix.MatrixUtils.ReflectType.RT_VERTICALLY;
 
 /**
  *

@@ -12,6 +12,11 @@ public class ExternalPixelMatrixLoader extends PixelMatrixLoader
 {
     private final File texcturesPackage;
 
+    /**
+     *
+     * @param packageName
+     * @param path
+     */
     protected ExternalPixelMatrixLoader(String packageName, String path)
     {
         this.texcturesPackage = new File(path + "/sprites/", packageName);
@@ -19,6 +24,11 @@ public class ExternalPixelMatrixLoader extends PixelMatrixLoader
             throw new IllegalArgumentException(String.format("Package %s is not exist.", packageName));
     }
 
+    /**
+     *
+     * @param spriteName
+     * @return
+     */
     @Override
     protected PixelMatrix read(String spriteName)
     {

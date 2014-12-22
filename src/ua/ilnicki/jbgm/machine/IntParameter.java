@@ -20,6 +20,10 @@ public class IntParameter implements Serializable
         this(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
     
+    /**
+     *
+     * @param maxValue
+     */
     public IntParameter(int maxValue)
     {
         this(Integer.MIN_VALUE, maxValue);

@@ -15,6 +15,11 @@ public final class Field extends PixelMatrix
     private final PixelMatrix baseLayer;
     private final List<Layer> layers;
     
+    /**
+     *
+     * @param width
+     * @param height
+     */
     public Field(int width, int height)
     {
         super(width, height);
@@ -23,16 +28,30 @@ public final class Field extends PixelMatrix
         this.layers = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public PixelMatrix getBaseLayer()
     {
         return baseLayer;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Layer> getLayers()
     {
         return layers;
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public Pixel getPixel(int x, int y)
     {
@@ -60,6 +79,11 @@ public final class Field extends PixelMatrix
         }
     }
 
+    /**
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Pixel getPixel(Point point)
     {

@@ -17,6 +17,11 @@ public final class Screen extends PixelMatrix implements Positionable
     private Field field;
     private Point position;
 
+    /**
+     *
+     * @param width
+     * @param height
+     */
     public Screen(int width, int height)
     {
         super(1, 1);
@@ -25,6 +30,12 @@ public final class Screen extends PixelMatrix implements Positionable
         this.height = height;
     }
     
+    /**
+     *
+     * @param width
+     * @param height
+     * @param field
+     */
     public Screen(int width, int height, Field field)
     {
         this(width, height);
@@ -37,18 +48,34 @@ public final class Screen extends PixelMatrix implements Positionable
         this.position = new Point(0, 0);;
     }
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @param value
+     */
     @Override
     public void setPixel(int y, int x, Pixel value)
     {
         throw new UnsupportedOperationException("Can`t change state of Screen.");
     }
 
+    /**
+     *
+     * @param point
+     * @param value
+     */
     @Override
     public void setPixel(Point point, Pixel value)
     {
         throw new UnsupportedOperationException("Can`t change state of Screen.");
     }
 
+    /**
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Pixel getPixel(Point point)
     {
@@ -73,30 +100,52 @@ public final class Screen extends PixelMatrix implements Positionable
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public Pixel getPixel(int x, int y)
     {
         return this.getPixel(new Point(x, y));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getWidth()
     {
         return this.width;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getHeight()
     {
         return this.height;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getPositionX()
     {
         return position.getX();
     }
     
+    /**
+     *
+     * @param positionX
+     */
     @Override
     public void setPositionX(int positionX)
     {
@@ -115,12 +164,20 @@ public final class Screen extends PixelMatrix implements Positionable
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getPositionY()
     {
         return position.getY();
     }
 
+    /**
+     *
+     * @param positionY
+     */
     @Override
     public void setPositionY(int positionY)
     {
@@ -139,6 +196,11 @@ public final class Screen extends PixelMatrix implements Positionable
         }
     }
     
+    /**
+     *
+     * @param positionY
+     * @param positionX
+     */
     @Override
     public void setPosition(int positionY, int positionX)
     {
@@ -146,12 +208,20 @@ public final class Screen extends PixelMatrix implements Positionable
         this.setPositionX(positionX);
     }
     
+    /**
+     *
+     * @param point
+     */
     @Override
     public void setPositionPoint(Point point)
     {
         this.position = point;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Point getPositionPoint()
     {

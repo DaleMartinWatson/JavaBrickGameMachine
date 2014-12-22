@@ -11,8 +11,21 @@ import ua.ilnicki.jbgm.system.Module;
  */
 public interface Drawer extends Module
 {
+
+    /**
+     *
+     * @param machine
+     * @param configManager
+     * @throws Exception
+     */
     public void init(Machine machine, ConfigManager configManager) throws Exception;
     
+    /**
+     *
+     * @param configManager
+     * @return
+     * @throws Exception
+     */
     public static Drawer createDrawer(ConfigManager configManager) throws Exception
     {
         DataCluster cluster = configManager.getCluster(Drawer.class);

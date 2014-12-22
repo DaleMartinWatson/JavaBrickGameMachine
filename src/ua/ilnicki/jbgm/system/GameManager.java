@@ -107,11 +107,20 @@ public class GameManager implements BrickGameProcessor
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<GameInfo> getGameInfoList()
     {
         return gameInfoList;
     }
 
+    /**
+     *
+     * @param gameInfo
+     * @param argument
+     */
     public void launchGame(GameInfo gameInfo, int argument)
     {
         try
@@ -140,6 +149,9 @@ public class GameManager implements BrickGameProcessor
         }
     }
 
+    /**
+     *
+     */
     public void exitGame()
     {
         this.currentGame.onStop();

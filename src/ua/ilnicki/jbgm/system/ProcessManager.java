@@ -13,6 +13,10 @@ public final class ProcessManager implements Module
     private final Set<BrickGameProcessor> processors;
     private final SystemManager system;
 
+    /**
+     *
+     * @param sm
+     */
     public ProcessManager(SystemManager sm)
     {
         this.system = sm;
@@ -21,6 +25,9 @@ public final class ProcessManager implements Module
         init();
     }
     
+    /**
+     *
+     */
     public void init()
     {
         this.processors.add(new SysKeysProcessor());

@@ -9,13 +9,25 @@ import java.io.Serializable;
 public class PixelMatrix implements Serializable
 {
 
+    /**
+     *
+     */
     protected final Pixel[][] pixelMatrix;
 
+    /**
+     *
+     * @param pm
+     */
     public PixelMatrix(PixelMatrix pm)
     {
         this.pixelMatrix = pm.pixelMatrix;
     }
 
+    /**
+     *
+     * @param width
+     * @param height
+     */
     public PixelMatrix(int width, int height)
     {
         if(width > 0 && height > 0)
@@ -24,31 +36,61 @@ public class PixelMatrix implements Serializable
             throw new IllegalArgumentException("Zero bound.");
     }
 
+    /**
+     *
+     * @return
+     */
     public int getWidth()
     {
         return this.pixelMatrix[0].length;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getHeight()
     {
         return this.pixelMatrix.length;
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Pixel getPixel(int x, int y)
     {
         return this.pixelMatrix[y][x];
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param value
+     */
     public void setPixel(int x, int y, Pixel value)
     {
         this.pixelMatrix[y][x] = value;
     }
     
+    /**
+     *
+     * @param point
+     * @return
+     */
     public Pixel getPixel(Point point)
     {
         return this.pixelMatrix[point.getY()][point.getX()];
     }
 
+    /**
+     *
+     * @param point
+     * @param value
+     */
     public void setPixel(Point point, Pixel value)
     {
         this.pixelMatrix[point.getY()][point.getX()] = value;

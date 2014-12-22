@@ -11,8 +11,21 @@ import ua.ilnicki.jbgm.system.Module;
  */
 public interface KeyReader extends Module
 {
+
+    /**
+     *
+     * @param keyboard
+     * @param configManager
+     * @throws Exception
+     */
     public void init(Keyboard keyboard, ConfigManager configManager)  throws Exception;
     
+    /**
+     *
+     * @param configManager
+     * @return
+     * @throws Exception
+     */
     public static KeyReader createKeyReader(ConfigManager configManager) throws Exception
     {
         DataCluster cluster = configManager.getCluster(KeyReader.class);

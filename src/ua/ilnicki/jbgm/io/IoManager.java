@@ -16,6 +16,12 @@ public final class IoManager
         this.modules = new HashMap<>();
     }
     
+    /**
+     *
+     * @param moduleName
+     * @return
+     * @throws Exception
+     */
     public Module getModule(String moduleName) throws Exception
     {
         if(moduleName != null)
@@ -39,6 +45,10 @@ public final class IoManager
         }
     }
     
+    /**
+     *
+     * @return
+     */
     protected static IoManager getInstance()
     {
         return IoManagerHolder.INSTANCE;

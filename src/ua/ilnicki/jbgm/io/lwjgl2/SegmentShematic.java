@@ -55,6 +55,11 @@ public class SegmentShematic
         shematics.put('-', new boolean[]{false, false, false, false, false, false, true,  false, false});
     }
     
+    /**
+     *
+     * @param chr
+     * @return
+     */
     public static boolean[] getSchematic(Character chr)
     {
         boolean[] shematic = shematics.get(chr);

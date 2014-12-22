@@ -179,6 +179,11 @@ public class Keyboard
             return Keyboard.this.isCtrlKeyDown(key);
         }
         
+        /**
+         *
+         * @param key
+         * @return
+         */
         public int keyDownTicksCount(CtrlKey key)
         {
             return Keyboard.this.ctrlKeyDownTicksCount(key);

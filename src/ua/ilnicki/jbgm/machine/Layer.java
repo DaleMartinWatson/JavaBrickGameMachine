@@ -15,6 +15,10 @@ public final class Layer extends PixelMatrix implements Positionable
     @SuppressWarnings("FieldNameHidesFieldInSuperclass")
     private PixelMatrix pixelMatrix;
     
+    /**
+     *
+     * @param pm
+     */
     public Layer(PixelMatrix pm)
     {
         super(1, 1);
@@ -22,29 +26,54 @@ public final class Layer extends PixelMatrix implements Positionable
         this.pixelMatrix = pm;
     }
     
+    /**
+     *
+     * @param width
+     * @param height
+     */
     public Layer(int width, int height)
     {
         this(new PixelMatrix(width, height));
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getWidth()
     {
         return pixelMatrix.getWidth();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getHeight()
     {
         return pixelMatrix.getHeight();
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param value
+     */
     @Override
     public void setPixel(int x, int y, Pixel value)
     {
         this.pixelMatrix.setPixel(x - this.position.getX(), y - this.position.getY(), value);
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public Pixel getPixel(int x, int y)
     {
@@ -58,12 +87,22 @@ public final class Layer extends PixelMatrix implements Positionable
         }
     }
 
+    /**
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Pixel getPixel(Point point)
     {
         return this.getPixel(point.getX(), point.getY());
     }
 
+    /**
+     *
+     * @param point
+     * @param value
+     */
     @Override
     public void setPixel(Point point, Pixel value)
     {
@@ -76,30 +115,51 @@ public final class Layer extends PixelMatrix implements Positionable
         return pixelMatrix.toString();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public int getPositionX()
     {
         return this.position.getX();
     }
         
+    /**
+     *
+     * @param positionX
+     */
     @Override
     public void setPositionX(int positionX)
     {
         this.position.setX(positionX);
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public int getPositionY()
     {
         return this.position.getY();
     }
 
+    /**
+     *
+     * @param positionY
+     */
     @Override
     public void setPositionY(int positionY)
     {
         this.position.setY(positionY);
     }
     
+    /**
+     *
+     * @param positionX
+     * @param positionY
+     */
     @Override
     public void setPosition(int positionX, int positionY)
     {
@@ -107,23 +167,39 @@ public final class Layer extends PixelMatrix implements Positionable
         this.setPositionY(positionY);
     }
     
+    /**
+     *
+     * @param point
+     */
     @Override
     public void setPositionPoint(Point point)
     {
         this.position = point;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Point getPositionPoint()
     {
         return this.position;
     }
     
+    /**
+     *
+     * @return
+     */
     public PixelMatrix getPixelMatrix()
     {
         return this.pixelMatrix;
     }
     
+    /**
+     *
+     * @param pm
+     */
     public void setPixelMatrix(PixelMatrix pm)
     {
         if(pm != null)

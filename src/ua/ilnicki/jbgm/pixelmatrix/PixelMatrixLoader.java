@@ -3,8 +3,6 @@ package ua.ilnicki.jbgm.pixelmatrix;
 import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.data.DataProvider;
 import ua.ilnicki.jbgm.data.DataWriteException;

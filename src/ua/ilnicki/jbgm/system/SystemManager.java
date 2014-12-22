@@ -20,11 +20,18 @@ public class SystemManager
     private final BrickGameExecuter executer;
     private boolean isInitialized = false;
 
+    /**
+     *
+     * @param jge
+     */
     public SystemManager(BrickGameExecuter jge)
     {
         this.executer = jge;
     }
 
+    /**
+     *
+     */
     public void init()
     {
         if (!this.isInitialized)
@@ -46,41 +53,72 @@ public class SystemManager
         this.isInitialized = true;
     }
 
+    /**
+     *
+     * @return
+     */
     public SaveManager getSaveManager()
     {
         return saveManager;
     }
 
+    /**
+     *
+     * @return
+     */
     public ConfigManager getConfigManager()
     {
         return configManager;
     }
 
+    /**
+     *
+     * @return
+     */
     public ProcessManager getProcessManager()
     {
         return processManager;
     }
 
+    /**
+     *
+     * @return
+     */
     public Machine getMachine()
     {
         return machine;
     }
 
+    /**
+     *
+     * @param packageName
+     * @return
+     */
     public PixelMatrixLoader createMatrixLoader(String packageName)
     {
         return PixelMatrixLoader.create(packageName, this.provider);
     }
 
+    /**
+     *
+     */
     public void reset()
     {
         this.executer.reset();
     }
     
+    /**
+     *
+     */
     public void stop()
     {
         this.stop(null);
     }
 
+    /**
+     *
+     * @param e
+     */
     public void stop(Exception e)
     {
         if(e == null)

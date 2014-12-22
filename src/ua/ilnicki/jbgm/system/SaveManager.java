@@ -12,11 +12,20 @@ public final class SaveManager
 {
     private final DataProvider dataProvider;
 
+    /**
+     *
+     * @param dataProvider
+     */
     public SaveManager(DataProvider dataProvider)
     {
         this.dataProvider = dataProvider;
     }
     
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public SaveCluster getCluster(Object obj)
     {
         return new SaveCluster(obj.getClass());
@@ -32,6 +41,9 @@ public final class SaveManager
         this.dataProvider.writeData(clusterName, dataCluster);
     }
 
+    /**
+     *
+     */
     public final class SaveCluster extends DataCluster
     {
 
@@ -44,6 +56,9 @@ public final class SaveManager
             this.clusterName = callerClass.getName();
         }
 
+        /**
+         *
+         */
         @Override
         public void close()
         {
@@ -51,6 +66,10 @@ public final class SaveManager
             this.closed = true;
         }
 
+        /**
+         *
+         * @throws Exception
+         */
         public void save() throws Exception
         {
             if(!this.closed)

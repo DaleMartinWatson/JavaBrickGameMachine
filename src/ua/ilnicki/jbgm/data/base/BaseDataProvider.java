@@ -12,22 +12,39 @@ import ua.ilnicki.jbgm.data.DataCluster;
 import ua.ilnicki.jbgm.data.DataProvider;
 import ua.ilnicki.jbgm.data.DataWriteException;
 
+/**
+ *
+ * @author Dmytro
+ */
 public final class BaseDataProvider implements DataProvider
 {
 
     private Path dataPath;
 
+    /**
+     *
+     * @throws DataWriteException
+     */
     public BaseDataProvider() throws DataWriteException
     {
         this.setLocation(".\\data\\");
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getLocation()
     {
         return this.dataPath.toString();
     }
 
+    /**
+     *
+     * @param path
+     * @throws DataWriteException
+     */
     @Override
     public void setLocation(String path) throws DataWriteException
     {
@@ -50,6 +67,11 @@ public final class BaseDataProvider implements DataProvider
         }
     }
 
+    /**
+     *
+     * @param clusterName
+     * @return
+     */
     @Override
     public DataCluster readData(String clusterName)
     {
@@ -64,6 +86,12 @@ public final class BaseDataProvider implements DataProvider
         }
     }
 
+    /**
+     *
+     * @param clusterName
+     * @param dataCluster
+     * @throws DataWriteException
+     */
     @Override
     public void writeData(String clusterName, DataCluster dataCluster) throws DataWriteException
     {

@@ -1,7 +1,5 @@
 package ua.ilnicki.jbgm.pixelmatrix;
 
-import ua.ilnicki.jbgm.game.GameInfo;
-
 /**
  *
  * @author Dmytro Ilnicki {@literal <dmytro@ilnicki.me>}

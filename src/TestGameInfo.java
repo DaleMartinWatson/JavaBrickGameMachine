@@ -4,7 +4,7 @@ import ua.ilnicki.jbgm.game.GameInfo;
 import ua.ilnicki.jbgm.game.test.TestGame;
 import ua.ilnicki.jbgm.pixelmatrix.MatrixUtils;
 import ua.ilnicki.jbgm.pixelmatrix.Pixel;
-import static ua.ilnicki.jbgm.pixelmatrix.Pixel.*;
+import static ua.ilnicki.jbgm.pixelmatrix.Pixel.BLACK;
 import ua.ilnicki.jbgm.pixelmatrix.PixelMatrix;
 
 /*
