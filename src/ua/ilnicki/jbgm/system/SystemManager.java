@@ -11,6 +11,7 @@ import ua.ilnicki.jbgm.pixelmatrix.PixelMatrixLoader;
  */
 public class SystemManager
 {
+
     private DataProvider provider;
     private ConfigManager configManager;
     private SaveManager saveManager;
@@ -39,7 +40,7 @@ public class SystemManager
             this.saveManager = new SaveManager(provider);
 
             machine = new Machine();
-            
+
             this.processManager = new ProcessManager(this);
         }
         this.isInitialized = true;
@@ -64,21 +65,32 @@ public class SystemManager
     {
         return machine;
     }
-    
+
     public PixelMatrixLoader createMatrixLoader(String packageName)
     {
         return PixelMatrixLoader.create(packageName, this.provider);
     }
 
-    public void stop()
+    public void reset()
     {
-        this.executer.stop();
-        this.configManager.saveAll();
+        this.executer.reset();
     }
     
+    public void stop()
+    {
+        this.stop(null);
+    }
+
     public void stop(Exception e)
     {
-        this.executer.stop(e);
+        if(e == null)
+        {
+            this.executer.stop();
+        }
+        else
+        {
+            this.executer.stop(e);
+        }
         this.configManager.saveAll();
     }
 }

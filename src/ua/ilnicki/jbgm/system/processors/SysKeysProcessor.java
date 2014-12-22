@@ -56,6 +56,11 @@ public class SysKeysProcessor implements BrickGameProcessor
             this.pause.toggle();
         }
         
+        if(this.keyboard.isSysKeyDown(SysKey.RESET))
+        {
+            this.systemManager.reset();
+        }
+        
         if(this.keyboard.isSysKeyDown(SysKey.ONOFF))
         {
             this.systemManager.stop();

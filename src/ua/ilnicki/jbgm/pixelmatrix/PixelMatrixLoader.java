@@ -136,7 +136,10 @@ public abstract class PixelMatrixLoader
         } else if (pathSource instanceof Game)
         {
             return new InternalPixelMatrixLoader(packageName, pathSource.getClass());
-        } 
+        } else if (pathSource.getClass().isInstance(Game.class))
+        {
+            return new InternalPixelMatrixLoader(packageName, (Class) pathSource);
+        }
         else
         {
             return null;

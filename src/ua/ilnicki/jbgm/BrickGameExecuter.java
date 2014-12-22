@@ -16,7 +16,8 @@ import ua.ilnicki.jbgm.system.SystemManager;
  */
 public class BrickGameExecuter
 {
-
+    private static boolean isReset = true;
+    
     private final SystemManager systemManager;
     private final Set<Module> modules;
     private final TickProvider tp;
@@ -30,6 +31,8 @@ public class BrickGameExecuter
 
     private void init()
     {
+        isReset = false;
+        
         this.systemManager.init();
 
         try
@@ -45,14 +48,13 @@ public class BrickGameExecuter
             keyReader.init(this.systemManager.getMachine().getKeyboard(),
                     configManager);
             this.modules.add(keyReader);
-            
+
             this.modules.add(this.systemManager.getProcessManager());
 
             //TODO: Add sound system implementation.
             this.modules.forEach(m -> m.onLoad());
 
-        }
-        catch (Exception ex)
+        } catch (Exception ex)
         {
             stop(ex);
         }
@@ -77,7 +79,7 @@ public class BrickGameExecuter
         {
             e.printStackTrace();
         }
-        
+
         ex.printStackTrace();
     }
 
@@ -86,12 +88,22 @@ public class BrickGameExecuter
         this.modules.forEach(m -> m.onStop());
         this.tp.stop();
     }
+    
+    public void reset()
+    {
+        this.stop();
+        isReset = true;
+    }
 
     public static void main(String[] args) throws DataWriteException
     {
-        BrickGameExecuter jbgm = new BrickGameExecuter();
+        do
+        {
+            BrickGameExecuter jbgm = new BrickGameExecuter();
 
-        jbgm.init();
-        jbgm.run();
+            jbgm.init();
+            jbgm.run();
+        }
+        while(isReset);
     }
 }

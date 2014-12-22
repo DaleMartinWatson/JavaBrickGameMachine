@@ -38,7 +38,7 @@ public class Lwjgl2 implements Drawer, KeyReader
     private HashMap<Integer, CtrlKey> ctrlKeyMap;
     private HashMap<Integer, SysKey> sysKeyMap;
 
-    private static final float pixelSize = 38.0f;
+    private static final float pixelSize = 24.0f;
     private static final float pixelDecorSize = pixelSize - pixelSize / 6;
     private static final float pixelInnerSize = pixelDecorSize - pixelSize / 6;
     private static final float pixelDistance = pixelSize / 8;
@@ -80,7 +80,8 @@ public class Lwjgl2 implements Drawer, KeyReader
             Display.setIcon(new ByteBuffer[]
             {
                 loadIcon("icon16.png", 16, 16),
-                loadIcon("icon32.png", 32, 32)
+                loadIcon("icon32.png", 32, 32),
+                loadIcon("icon64.png", 64, 64)
             });
         } catch (IOException e)
         {
